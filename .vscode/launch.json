@@ -1,0 +1,44 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Cortex Debug (SWD)",
+            "cwd": "${workspaceFolder}",
+            "executable": "${workspaceFolder}/system/build/project.elf",
+            "request": "launch",
+            "type": "cortex-debug",
+            "servertype": "openocd",
+            "interface": "swd",
+            "device": "STM32F103C8",
+            "svdFile": "${workspaceFolder}/system/debug/STM32F103.svd",
+            "preLaunchTask": "Build STM32",
+            "liveWatch": {
+                "enabled": true,
+                "samplesPerSecond": 10
+            },
+            "configFiles": [
+                "interface/stlink.cfg",
+                "target/stm32f1x.cfg"
+            ],
+            "load": true,
+            "runToEntryPoint": "main",
+            "resetTarget": "init",
+            "postLaunchCommands": [
+                "monitor reset halt",
+                "set $sp = *(uint32_t*)0x08001000",
+                "set $pc = *(uint32_t*)0x08001004",
+                "flushregs"
+            ],
+            "overrideRestartCommands": [
+                "monitor reset halt",
+                "set $sp = *(uint32_t*)0x08001000",
+                "set $pc = *(uint32_t*)0x08001004",
+                "flushregs"
+            ],
+            "overrideStopCommands": [
+                "monitor shutdown"
+            ],
+            "postDebugTask": "Kill OpenOCD"
+        }
+    ]
+}
