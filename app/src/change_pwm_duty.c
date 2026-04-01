@@ -2,5 +2,5 @@
 
 void Change_PWM_Duty_Cycle(uint16_t duty)
 {
-    Change_Duty(duty);
+    TIM2_PWM_Change_Duty(duty);
 }

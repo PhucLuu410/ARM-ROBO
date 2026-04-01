@@ -7,6 +7,11 @@
 #include "GPIO.h"
 
 void TIM2_Init(void);
-void Change_Duty(uint16_t duty);
+void TIM2_PWM_Change_Duty(uint16_t duty);
+
+void TIM3_Init(void);
+void TIM3_Start(void);
+void TIM3_Stop(void);
+void TIM3_ResetCount(void);
 
 #endif

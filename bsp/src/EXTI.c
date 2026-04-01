@@ -9,4 +9,6 @@ void EXTI_Init(void)
 
     NVIC_EnableIRQ(EXTI1_IRQn);
     NVIC_EnableIRQ(USART1_IRQn);
+    NVIC_EnableIRQ(TIM2_IRQn);
+    NVIC_EnableIRQ(TIM3_IRQn);
 }

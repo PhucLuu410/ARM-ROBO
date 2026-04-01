@@ -3,4 +3,5 @@
 
 #include <interupt.h>
 #include <change_pwm_duty.h>
+#include <modbus.h>
 #endif

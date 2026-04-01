@@ -28,6 +28,6 @@ void RCC_Init(void)
     RCC->APB2ENR |= (1 << 14); // USART1
 
     RCC->APB1ENR |= (1 << 0);  // TIM2
-    RCC->APB1ENR |= (1 << 1);  // TIM2
+    RCC->APB1ENR |= (1 << 1);  // TIM3
     RCC->APB1ENR |= (1 << 28); // PWR
 }

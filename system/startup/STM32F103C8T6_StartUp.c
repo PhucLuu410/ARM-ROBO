@@ -6,7 +6,8 @@ extern uint32_t _edata;
 extern uint32_t _sbss;
 extern uint32_t _ebss;
 extern uint32_t _estack;
-
+extern uint32_t _scustom_buffer;
+extern uint32_t _ecustom_buffer;
 extern int main(void);
 
 void Reset_Handler(void)
@@ -14,7 +15,6 @@ void Reset_Handler(void)
 
     uint32_t *src = &_sidata;
     uint32_t *dst = &_sdata;
-
     while (dst < &_edata)
     {
         *dst++ = *src++;
@@ -26,6 +26,11 @@ void Reset_Handler(void)
         *dst++ = 0;
     }
 
+    uint32_t *custom = &_scustom_buffer;
+    while (custom < &_ecustom_buffer)
+    {
+        *custom++ = 0;
+    }
     main();
 
     while (1)
@@ -58,6 +63,7 @@ void PVD_IRQHandler(void) __attribute__((weak, alias("Default_Handler")));
 void EXTI0_IRQHandler(void) __attribute__((weak, alias("Default_Handler")));
 void EXTI1_IRQHandler(void) __attribute__((weak, alias("Default_Handler")));
 void TIM2_IRQHandler(void) __attribute__((weak, alias("Default_Handler")));
+void TIM3_IRQHandler(void) __attribute__((weak, alias("Default_Handler")));
 void USART1_IRQHandler(void) __attribute__((weak, alias("Default_Handler")));
 /* Bạn có thể thêm các Handler khác tương tự nếu cần */
 
@@ -109,7 +115,7 @@ __attribute__((section(".isr_vector"))) void (*const g_pfnVectors[])(void) = {
     Default_Handler,   /* 42. TIM1 Trigger / COM */
     Default_Handler,   /* 43. TIM1 CC */
     TIM2_IRQHandler,   /* 44. TIM2 (IRQ28) */
-    Default_Handler,   /* 45. TIM3 */
+    TIM3_IRQHandler,   /* 45. TIM3 */
     Default_Handler,   /* 46. TIM4 */
     Default_Handler,   /* 47. I2C1 EV */
     Default_Handler,   /* 48. I2C1 ER */

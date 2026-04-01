@@ -14,7 +14,30 @@ void TIM2_Init(void)
     TIM2->CR1 |= (1 << 0);             // Counter enable
 }
 
-void Change_Duty(uint16_t duty)
+void TIM3_Init(void)
+{
+    TIM3->CR1 |= (1 << 7);  // Auto-reload preload enable
+    TIM3->DIER |= (1 << 0); // Update interrupt enable
+    TIM3->PSC = 7;          // 8Mhz / 8 = 1Mhz
+    TIM3->ARR = 3999;       // Count to 1000 -> 1ms 1 UEV
+}
+
+void TIM3_Start(void)
+{
+    TIM3->CR1 |= (1 << 0); // Counter enable
+}
+
+void TIM3_Stop(void)
+{
+    TIM3->CR1 &= ~(1 << 0); // Counter disable
+}
+
+void TIM3_ResetCount(void)
+{
+    TIM3->CNT = 0;
+}
+
+void TIM2_PWM_Change_Duty(uint16_t duty)
 {
     if (duty > 1000)
         duty = 1000;

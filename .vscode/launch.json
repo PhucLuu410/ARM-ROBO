@@ -14,7 +14,7 @@
             "preLaunchTask": "Build STM32",
             "liveWatch": {
                 "enabled": true,
-                "samplesPerSecond": 10
+                "samplesPerSecond": 10000
             },
             "configFiles": [
                 "interface/stlink.cfg",

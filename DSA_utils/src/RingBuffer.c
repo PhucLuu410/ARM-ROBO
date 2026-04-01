@@ -1,53 +1,66 @@
 #include "RingBuffer.h"
+#include <stdint.h>
 
-int front = 0;
-int rear = 0;
-int idx = 0;
-static volatile char buffer[10];
-__attribute__((section(".custom_buffer"))) volatile char receive[10];
+#define BUFFER_SIZE 9
+#define MODBUS_FRAME_SIZE 8
 
-void RingBuffer(char letter)
+volatile int front = 0;
+volatile int rear = 0;
+__attribute__((section(".custom_buffer"))) volatile uint8_t buffer[BUFFER_SIZE] = {0};
+
+void RingBuffer_Push(uint8_t letter)
 {
-    if (letter != '\0')
+    int next = (rear + 1) % BUFFER_SIZE;
+
+    if (next != front)
     {
-        int next = (rear + 1) % sizeof(buffer);
-        if (next != front)
-        {
-            buffer[rear] = letter;
-            rear = next;
-        }
+        buffer[rear] = letter;
+        rear = next;
     }
 }
-char PopFromBuffer(void)
+
+int RingBuffer_Available(void)
 {
-    char data = '\0';
-    if (front != rear)
+    if (rear >= front)
+        return (rear - front);
+    else
+        return (BUFFER_SIZE - front + rear);
+}
+
+uint8_t PopFromBuffer(void)
+{
+    if (front == rear)
     {
-        data = buffer[front];
-        front = (front + 1) % sizeof(buffer);
+        return 0;
     }
+
+    uint8_t data = buffer[front];
+    front = (front + 1) % BUFFER_SIZE;
+
     return data;
 }
 
-int ReceiveData(void)
+void Get_MODBUS_Data(uint8_t *data)
 {
-    char c = PopFromBuffer();
+    int count = RingBuffer_Available();
 
-    if (c == '\0')
-        return 0;
-
-    if (c == '\n')
+    if (count >= MODBUS_FRAME_SIZE)
     {
-        receive[idx] = '\0';
-        idx = 0;
-        return 1;
+        for (int i = 0; i < MODBUS_FRAME_SIZE; i++)
+        {
+            data[i] = PopFromBuffer();
+        }
     }
+}
 
-    if (idx < sizeof(receive) - 1)
+void MODBUS_Error_Clear_Frame(void)
+{
+    int count = RingBuffer_Available();
+    if (count > 0)
     {
-        receive[idx] = c;
-        idx++;
+        front = 0;
+        rear = 0;
+        for (int i = 0; i < BUFFER_SIZE; i++)
+            buffer[i] = 0;
     }
-
-    return 0;
 }
