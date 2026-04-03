@@ -1,10 +1,10 @@
 #ifndef __BSP_H
 #define __BSP_H
 
-#include "GPIO.h"
-#include "RCC.h"
-#include "TIM.h"
-#include "EXTI.h"
-#include "UART.h"
+#include "BSP_GPIO.h"
+#include "BSP_RCC.h"
+#include "BSP_TIM.h"
+#include "BSP_EXTI.h"
+#include "BSP_UART.h"
 
 #endif

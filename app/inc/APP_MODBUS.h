@@ -1,10 +1,11 @@
 #ifndef __MODBUS_H
 #define __MODBUS_H
 
-#include "RingBuffer.h"
+#include "DSA.h"
+#include "BSP.h"
 #include <string.h>
 #include <stdint.h>
-#include "FSM.h"
+
 typedef struct
 {
     uint8_t slave_addr;
@@ -15,6 +16,5 @@ typedef struct
 } ModbusRequest;
 
 void MODBUS_Parse_Request(void);
-uint16_t MODBUS_CRC_Check(uint8_t *buf, int len);
 
 #endif

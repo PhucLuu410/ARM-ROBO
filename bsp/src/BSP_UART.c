@@ -1,4 +1,6 @@
-#include "UART.h"
+#include "BSP_UART.h"
+
+extern SystemFlag main_flag;
 
 void UART_Init(void)
 {
@@ -26,5 +28,22 @@ void UART_SendString(const char *str)
     {
         UART_SendData((uint8_t)(*str));
         str++;
+    }
+}
+
+void USART1_IRQHandler(void)
+{
+    if (USART1->SR & (1 << 5)) // RXNE
+    {
+        uint8_t received_data = (uint8_t)(USART1->DR);
+        RingBuffer_Push(received_data);
+    }
+    if (USART1->SR & (1 << 4)) // IDLE
+    {
+        volatile uint32_t tmp = USART1->SR;
+        volatile uint32_t tmp2 = USART1->DR;
+        (void)tmp;
+        (void)tmp2;
+        main_flag.MODBUS_FLAG = 1;
     }
 }

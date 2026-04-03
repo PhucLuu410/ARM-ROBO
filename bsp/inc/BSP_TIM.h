@@ -1,10 +1,12 @@
 #ifndef __TIM_H
 #define __TIM_H
 
+#include <stdint.h>
+#include <stdbool.h>
+
 #include "stm32f103xb.h"
-#include "stdbool.h"
-#include "stdio.h"
-#include "GPIO.h"
+#include "BSP_GPIO.h"
+#include "DSA.h"
 
 void TIM2_Init(void);
 void TIM2_PWM_Change_Duty(uint16_t duty);

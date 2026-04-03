@@ -1,4 +1,4 @@
-#include "EXTI.h"
+#include "BSP_EXTI.h"
 
 void EXTI_Init(void)
 {
@@ -7,8 +7,8 @@ void EXTI_Init(void)
     EXTI->IMR |= (1 << 1);
     EXTI->RTSR |= (1 << 1);
 
-    // NVIC_EnableIRQ(EXTI1_IRQn);
+    NVIC_EnableIRQ(EXTI1_IRQn);
     NVIC_EnableIRQ(USART1_IRQn);
-    // NVIC_EnableIRQ(TIM2_IRQn);
-    // NVIC_EnableIRQ(TIM3_IRQn);
+    NVIC_EnableIRQ(TIM2_IRQn);
+    NVIC_EnableIRQ(TIM3_IRQn);
 }

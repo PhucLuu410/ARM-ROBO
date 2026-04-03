@@ -1,4 +1,6 @@
-#include "TIM.h"
+#include "BSP_TIM.h"
+
+extern uint32_t count;
 
 void TIM2_Init(void)
 {
@@ -42,4 +44,27 @@ void TIM2_PWM_Change_Duty(uint16_t duty)
     if (duty > 1000)
         duty = 1000;
     TIM2->CCR1 = duty;
+}
+
+void TIM2_IRQHandler(void)
+{
+    if (TIM2->SR & (1 << 0))
+    {
+        TIM2->SR &= ~(1 << 0);
+        count = (count + 1 / 1000);
+    }
+    if (TIM2->SR & (1 << 1))
+    {
+        TIM2->SR &= ~(1 << 1);
+    }
+}
+
+void TIM3_IRQHandler(void)
+{
+    if (TIM3->SR & (1 << 0))
+    {
+        TIM3->SR &= ~(1 << 0);
+        TIM3_Stop();
+        GPIO_WritePin(GPIOC, 13, 1);
+    }
 }

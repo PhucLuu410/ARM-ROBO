@@ -1,4 +1,4 @@
-#include "RCC.h"
+#include "BSP_RCC.h"
 
 void RCC_Init(void)
 {
@@ -31,4 +31,12 @@ void RCC_Init(void)
     RCC->APB1ENR |= (1 << 0);  // TIM2
     RCC->APB1ENR |= (1 << 1);  // TIM3
     RCC->APB1ENR |= (1 << 28); // PWR
+}
+
+void HardFault_Handler(void)
+{
+    while (1)
+    {
+        
+    }
 }
