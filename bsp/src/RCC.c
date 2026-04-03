@@ -4,8 +4,9 @@ void RCC_Init(void)
 {
     RCC->CR |= (1 << 16); // HSE ON
     while (!(RCC->CR & (1 << 17)))
+        ;
 
-        RCC->CFGR &= ~(3 << 0);
+    RCC->CFGR &= ~(3 << 0);
     RCC->CFGR |= (1 << 0);
 
     while (((RCC->CFGR >> 2) & 0x3) != 0x1)

@@ -3,8 +3,8 @@ ENTRY(Reset_Handler)
 MEMORY
 {
     FLASH (rx)      : ORIGIN = 0x08001000, LENGTH = 60K
-    RAM   (xrw)     : ORIGIN = 0x20000000, LENGTH = 16K
-    BUFFER(xrw)     : ORIGIN = 0x20004000, LENGTH = 4K
+    BUFFER (xrw)     : ORIGIN = 0x20000000, LENGTH = 4K
+    RAM (xrw)     : ORIGIN = 0x20001000, LENGTH = 16K
 }
 
 SECTIONS

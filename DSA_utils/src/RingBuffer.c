@@ -1,12 +1,12 @@
 #include "RingBuffer.h"
 #include <stdint.h>
 
-#define BUFFER_SIZE 9
+#define BUFFER_SIZE 16
 #define MODBUS_FRAME_SIZE 8
 
 volatile int front = 0;
 volatile int rear = 0;
-__attribute__((section(".custom_buffer"))) volatile uint8_t buffer[BUFFER_SIZE] = {0};
+volatile uint8_t buffer[BUFFER_SIZE] = {0};
 
 void RingBuffer_Push(uint8_t letter)
 {
@@ -40,27 +40,16 @@ uint8_t PopFromBuffer(void)
     return data;
 }
 
-void Get_MODBUS_Data(uint8_t *data)
+bool Get_MODBUS_Data(uint8_t *data)
 {
-    int count = RingBuffer_Available();
-
-    if (count >= MODBUS_FRAME_SIZE)
+    if (RingBuffer_Available() != MODBUS_FRAME_SIZE)
     {
-        for (int i = 0; i < MODBUS_FRAME_SIZE; i++)
-        {
-            data[i] = PopFromBuffer();
-        }
+        front = rear;
+        return false;
     }
-}
-
-void MODBUS_Error_Clear_Frame(void)
-{
-    int count = RingBuffer_Available();
-    if (count > 0)
+    for (int i = 0; i < MODBUS_FRAME_SIZE; i++)
     {
-        front = 0;
-        rear = 0;
-        for (int i = 0; i < BUFFER_SIZE; i++)
-            buffer[i] = 0;
+        data[i] = PopFromBuffer();
     }
+    return true;
 }

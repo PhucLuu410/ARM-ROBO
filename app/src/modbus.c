@@ -1,36 +1,40 @@
 #include "modbus.h"
 
-void MODBUS_Parse_Request(uint8_t *data, ModbusRequest *request)
+uint8_t request_buffer[8];
+ModbusRequest request;
+extern SystemFlag main_flag;
+uint16_t CRC_Check = 0;
+
+void MODBUS_Parse_Request(void)
 {
-    request->slave_addr = data[0];
-    request->func_code = data[1];
-    request->start_addr = (data[2] << 8) | data[3];
-    request->reg_num = (data[4] << 8) | data[5];
-    request->crc = (data[6] << 8) | data[7];
+    if (main_flag.MODBUS_FLAG == 1)
+    {
+        Get_MODBUS_Data(request_buffer);
+        request.slave_addr = request_buffer[0];
+        request.func_code = request_buffer[1];
+        request.start_addr = (request_buffer[2] << 8) | request_buffer[3];
+        request.reg_num = (request_buffer[4] << 8) | request_buffer[5];
+        request.crc = (request_buffer[6] << 8) | request_buffer[7];
+        main_flag.MODBUS_FLAG = 0;
+    }
 }
 
-uint16_t MODBUS_CRC_Check(ModbusRequest *request)
+uint16_t MODBUS_CRC_Check(uint8_t *buf, int len)
 {
-    uint16_t check = 0xFFFF;
-    const uint8_t *ptr = (uint8_t *)request;
+    uint16_t crc = 0xFFFF;
 
-    for (int i = 0; i < 6; i++)
+    for (int i = 0; i < len; i++)
     {
-        check = check ^ ptr[i];
+        crc ^= buf[i];
 
         for (int j = 0; j < 8; j++)
         {
-            if (check & 0x0001)
-            {
-                check = (check >> 1) ^ 0xA001;
-            }
+            if (crc & 0x0001)
+                crc = (crc >> 1) ^ 0xA001;
             else
-            {
-                check = check >> 1;
-            }
+                crc >>= 1;
         }
     }
 
-    request->crc = check;
-    return check;
+    return crc;
 }

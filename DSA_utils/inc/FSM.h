@@ -2,12 +2,11 @@
 #define __FSM_H
 
 #include <stdint.h>
-typedef enum
+typedef struct
 {
-    NO_FLAG = 0,
-    MODBUS_FLAG,
-    GPIO_FLAG,
-    TIM2_FLAG,
+    uint8_t MODBUS_FLAG;
+    uint8_t GPIO_FLAG;
+    uint8_t TIM2_FLAG;
 } SystemFlag;
 
 typedef enum

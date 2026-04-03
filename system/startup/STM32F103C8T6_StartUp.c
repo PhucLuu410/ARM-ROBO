@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "stm32f103xb.h"
 
 extern uint32_t _sidata;
 extern uint32_t _sdata;
@@ -12,7 +13,7 @@ extern int main(void);
 
 void Reset_Handler(void)
 {
-
+    SCB->VTOR = 0x08001000;
     uint32_t *src = &_sidata;
     uint32_t *dst = &_sdata;
     while (dst < &_edata)
@@ -26,11 +27,12 @@ void Reset_Handler(void)
         *dst++ = 0;
     }
 
-    uint32_t *custom = &_scustom_buffer;
-    while (custom < &_ecustom_buffer)
+    dst = &_scustom_buffer;
+    while (dst < &_ecustom_buffer)
     {
-        *custom++ = 0;
+        *dst++ = 0;
     }
+
     main();
 
     while (1)

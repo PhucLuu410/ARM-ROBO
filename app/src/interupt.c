@@ -4,7 +4,7 @@ volatile uint32_t test_timer = 0;
 volatile uint32_t modbus_frame_ready = 0;
 volatile uint32_t count = 0;
 volatile uint32_t last_interrupt_time = 0;
-SystemFlag main_flag = NO_FLAG;
+extern SystemFlag main_flag;
 
 void EXTI1_IRQHandler(void)
 {
@@ -27,11 +27,15 @@ void USART1_IRQHandler(void)
     if (USART1->SR & (1 << 5)) // RXNE
     {
         uint8_t received_data = (uint8_t)(USART1->DR);
-        main_flag = MODBUS_FLAG;
         RingBuffer_Push(received_data);
-        TIM3_ResetCount();
-        TIM3_Start();
-        GPIO_WritePin(GPIOC, 13, 0);
+    }
+    if (USART1->SR & (1 << 4)) // IDLE
+    {
+        volatile uint32_t tmp = USART1->SR;
+        volatile uint32_t tmp2 = USART1->DR;
+        (void)tmp;
+        (void)tmp2;
+        main_flag.MODBUS_FLAG = 1;
     }
 }
 
@@ -55,8 +59,6 @@ void TIM3_IRQHandler(void)
         TIM3->SR &= ~(1 << 0);
         TIM3_Stop();
         GPIO_WritePin(GPIOC, 13, 1);
-        main_flag = NO_FLAG;
-        MODBUS_Error_Clear_Frame();
     }
 }
 
@@ -64,5 +66,14 @@ void HardFault_Handler(void)
 {
     while (1)
     {
+        GPIO_TogglePin(GPIOC, 13);
+    }
+}
+
+void UsageFault_Handler(void)
+{
+    while (1)
+    {
+        GPIO_TogglePin(GPIOC, 13);
     }
 }

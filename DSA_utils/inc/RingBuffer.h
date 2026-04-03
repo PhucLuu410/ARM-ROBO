@@ -3,10 +3,11 @@
 
 #include <string.h>
 #include <stdint.h>
+#include <stdbool.h>
 
 void RingBuffer_Push(uint8_t letter);
 uint8_t PopFromBuffer(void);
-void Get_MODBUS_Data(uint8_t *data);
+bool Get_MODBUS_Data(uint8_t *data);
 void MODBUS_Error_Clear_Frame(void);
 
 #endif
