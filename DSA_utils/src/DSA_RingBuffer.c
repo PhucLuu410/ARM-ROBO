@@ -1,7 +1,7 @@
 #include "DSA_RingBuffer.h"
 #include <stdint.h>
 
-#define BUFFER_SIZE 16
+#define BUFFER_SIZE 256
 #define MODBUS_FRAME_SIZE 8
 
 volatile int front = 0;

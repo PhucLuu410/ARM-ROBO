@@ -1,7 +1,7 @@
 #include "APP_MODBUS.h"
 
 uint8_t request_buffer[8];
-ModbusRequest request;
+__attribute__((section(".custom_buffer"))) ModbusRequest request;
 extern SystemFlag main_flag;
 uint16_t CRC_Check = 0;
 
@@ -30,7 +30,8 @@ void MODBUS_Parse_Request(void)
     if (main_flag.MODBUS_FLAG == 1)
     {
         Get_MODBUS_Data(request_buffer);
-        if (MODBUS_CRC_Check(request_buffer, 6) != ((request_buffer[6] << 8) | request_buffer[7]))
+        uint16_t CRC_Check = MODBUS_CRC_Check(request_buffer, 6);
+        if (CRC_Check != ((request_buffer[6]) << 8 | request_buffer[7]))
         {
             main_flag.MODBUS_FLAG = 0;
             return;

@@ -46,6 +46,25 @@ void TIM2_PWM_Change_Duty(uint16_t duty)
     TIM2->CCR1 = duty;
 }
 
+void TIM2_Change_Period(uint16_t period)
+{
+    if (period > 65535)
+        period = 65535;
+    TIM2->ARR = period;
+}
+
+void TIM2_Change_Frequency(uint16_t frequency)
+{
+    if (frequency == 0)
+        frequency = 1;
+    uint32_t timer_clock = 8000000; // Assuming APB1 timer clock is 8 MHz
+    uint32_t prescaler = (timer_clock / (frequency * 1000)) - 1;
+    if (prescaler > 65535)
+        prescaler = 65535;
+    TIM2->PSC = prescaler;
+}
+
+
 void TIM2_IRQHandler(void)
 {
     if (TIM2->SR & (1 << 0))

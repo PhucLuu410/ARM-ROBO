@@ -10,6 +10,8 @@
 
 void TIM2_Init(void);
 void TIM2_PWM_Change_Duty(uint16_t duty);
+void TIM2_Change_Period(uint16_t period);
+void TIM2_Change_Frequency(uint16_t frequency);
 
 void TIM3_Init(void);
 void TIM3_Start(void);
