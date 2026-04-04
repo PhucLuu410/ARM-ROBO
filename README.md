@@ -1,128 +1,34 @@
-PROJECT ARM ROBOT
+# 🤖 PROJECT ARM ROBOT (STM32 Bare-metal)
 
-TECH.
-Bare metal STM32F1 Cortex M3 TIM, UART(MODBUS RTU), ADC, GPIO, EXTI, AFIO
-Design Linker Script and StartUp
-Bootloader
-Event Driven and Finite System State
+Dự án điều khiển cánh tay Robot dựa trên vi điều khiển **STM32F103 (Cortex-M3)**. Hệ thống được xây dựng hoàn toàn từ mức thanh ghi (Register-level), không sử dụng các thư viện trừu tượng như HAL hay LL, nhằm tối ưu hóa hiệu suất thời gian thực và quản lý bộ nhớ tuyệt đối.
 
-Project Tree:
-Robot_Project 
-├───app
-│   ├───inc
-│   │       app.h
-│   │       change_pwm_duty.h
-│   │       interupt.h
-│   │       modbus.h
-│   │
-│   └───src
-│           change_pwm_duty.c
-│           interupt.c
-│           modbus.c
-│
-├───bsp
-│   ├───inc
-│   │       bsp.h
-│   │       EXTI.h
-│   │       GPIO.h
-│   │       RCC.h
-│   │       TIM.h
-│   │       UART.h
-│   │
-│   └───src
-│           EXTI.c
-│           GPIO.c
-│           RCC.c
-│           TIM.c
-│           UART.c
-│
-├───DSA_utils
-│   ├───inc
-│   │       FSM.h
-│   │       RingBuffer.h
-│   │       utils.h
-│   │
-│   └───src
-│           FSM.c
-│           RingBuffer.c
-│
-├───main
-│   ├───inc
-│   │       main.h
-│   │
-│   └───src
-│           main.c
-│
-├───middle
-│   ├───inc
-│   └───src
-└───system
-    ├───build
-    │   │   project.bin
-    │   │   project.elf
-    │   │
-    │   ├───app
-    │   │   └───src
-    │   │           change_pwm_duty.o
-    │   │           interupt.o
-    │   │           modbus.o
-    │   │           mosbus.o
-    │   │
-    │   ├───bsp
-    │   │   └───src
-    │   │           EXTI.o
-    │   │           GPIO.o
-    │   │           RCC.o
-    │   │           TIM.o
-    │   │           UART.o
-    │   │
-    │   ├───DSA_utils
-    │   │   │   RingBuffer.o
-    │   │   │
-    │   │   └───src
-    │   │           FSM.o
-    │   │           RingBuffer.o
-    │   │
-    │   ├───main
-    │   │   └───src
-    │   │           main.o
-    │   │
-    │   └───system
-    │       ├───CMSIS
-    │       │       system_stm32f1xx.o
-    │       │
-    │       ├───src
-    │       │       syscalls.o
-    │       │
-    │       └───startup
-    │               STM32F103C8T6_StartUp.o
-    │
-    ├───CMSIS
-    │       cmsis_compiler.h
-    │       cmsis_gcc.h
-    │       cmsis_version.h
-    │       core_cm3.h
-    │       stm32f103xb.h
-    │       stm32f1xx.h
-    │       system_stm32f1xx.c
-    │       system_stm32f1xx.h
-    │       
-    ├───debug
-    │       STM32F103.svd
-    │
-    ├───linker
-    │       STM32F103C8T6_Linker.ld
-    │
-    ├───src
-    │       syscalls.c
-    │
-    └───startup
-            STM32F103C8T6_StartUp.c
+---
 
+## 🛠 Thông số Kỹ thuật (Technical Specs)
+* **Core:** ARM Cortex-M3 (72MHz).
+* **Methodology:** Bare-metal Programming (Startup & Linker Script Design).
+* **Architecture:** Event-Driven kết hợp Finite State Machine (FSM).
+* **Communication:** Modbus RTU Protocol (Custom Parser & CRC-16).
+* **Peripherals:** TIM (PWM Control), UART (Interrupt-driven), ADC (Feedback), GPIO, EXTI.
+* **Data Structures:** Ring Buffer (Circular Buffer) cho xử lý UART không nghẽn.
 
+---
 
-app: Application Function.
-bsp: Board Packet Support.
-middle: MiddleWare.
-System: For Cortex M, linker script, startup code, build file, CMSIS lib.
-DSA-utils: DSA using for this project
+## 📂 Cấu trúc Thư mục (Project Tree)
+
+```text
+Robot_Project
+├───app             # Logic ứng dụng (Modbus, PWM Control, Interrupts)
+│   ├───inc         # Header files (.h)
+│   └───src         # Source files (.c)
+├───bsp             # Board Support Package (Driver: RCC, GPIO, UART, TIM...)
+│   ├───inc         
+│   └───src         
+├───middle          # Lớp trung gian (Middleware)
+├───DSA_utils       # Cấu trúc dữ liệu & Giải thuật (FSM, RingBuffer)
+├───main            # Điểm khởi đầu chương trình (main.c/h)
+└───system          # Cấu hình hệ thống cấp thấp (Low-level)
+    ├───CMSIS       # Thư viện chuẩn lõi Cortex-M
+    ├───linker      # Custom Linker Script (.ld)
+    ├───startup     # Custom Startup Code (.c)
+    └───build       # Chứa file thực thi (.bin, .elf) và Object files (.o)
