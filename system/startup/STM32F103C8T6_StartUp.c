@@ -67,6 +67,7 @@ void EXTI1_IRQHandler(void) __attribute__((weak, alias("Default_Handler")));
 void TIM2_IRQHandler(void) __attribute__((weak, alias("Default_Handler")));
 void TIM3_IRQHandler(void) __attribute__((weak, alias("Default_Handler")));
 void USART1_IRQHandler(void) __attribute__((weak, alias("Default_Handler")));
+void EXTI15_10_IRQHandler(void) __attribute__((weak, alias("Default_Handler")));
 /* Bạn có thể thêm các Handler khác tương tự nếu cần */
 
 __attribute__((section(".isr_vector"))) void (*const g_pfnVectors[])(void) = {
@@ -88,45 +89,46 @@ __attribute__((section(".isr_vector"))) void (*const g_pfnVectors[])(void) = {
     SysTick_Handler,  /* 15. SysTick */
 
     /* External Interrupts */
-    WWDG_IRQHandler,   /* 16. Window Watchdog */
-    PVD_IRQHandler,    /* 17. PVD */
-    Default_Handler,   /* 18. TAMPER */
-    Default_Handler,   /* 19. RTC */
-    Default_Handler,   /* 20. FLASH */
-    Default_Handler,   /* 21. RCC */
-    EXTI0_IRQHandler,  /* 22. EXTI Line 0 */
-    EXTI1_IRQHandler,  /* 23. EXTI Line 1 */
-    Default_Handler,   /* 24. EXTI Line 2 */
-    Default_Handler,   /* 25. EXTI Line 3 */
-    Default_Handler,   /* 26. EXTI Line 4 */
-    Default_Handler,   /* 27. DMA1 Channel 1 */
-    Default_Handler,   /* 28. DMA1 Channel 2 */
-    Default_Handler,   /* 29. DMA1 Channel 3 */
-    Default_Handler,   /* 30. DMA1 Channel 4 */
-    Default_Handler,   /* 31. DMA1 Channel 5 */
-    Default_Handler,   /* 32. DMA1 Channel 6 */
-    Default_Handler,   /* 33. DMA1 Channel 7 */
-    Default_Handler,   /* 34. ADC1 & ADC2 */
-    Default_Handler,   /* 35. USB HP / CAN TX */
-    Default_Handler,   /* 36. USB LP / CAN RX0 */
-    Default_Handler,   /* 37. CAN RX1 */
-    Default_Handler,   /* 38. CAN SCE */
-    Default_Handler,   /* 39. EXTI Line 9..5 */
-    Default_Handler,   /* 40. TIM1 Break */
-    Default_Handler,   /* 41. TIM1 Update */
-    Default_Handler,   /* 42. TIM1 Trigger / COM */
-    Default_Handler,   /* 43. TIM1 CC */
-    TIM2_IRQHandler,   /* 44. TIM2 (IRQ28) */
-    TIM3_IRQHandler,   /* 45. TIM3 */
-    Default_Handler,   /* 46. TIM4 */
-    Default_Handler,   /* 47. I2C1 EV */
-    Default_Handler,   /* 48. I2C1 ER */
-    Default_Handler,   /* 49. I2C2 EV */
-    Default_Handler,   /* 50. I2C2 ER */
-    Default_Handler,   /* 51. SPI1 */
-    Default_Handler,   /* 52. SPI2 */
-    USART1_IRQHandler, /* 53. USART1 (IRQ37) <--- ĐÃ THÊM Ở ĐÂY */
-    Default_Handler,   /* 54. USART2 */
-    Default_Handler,   /* 55. USART3 */
+    WWDG_IRQHandler,      /* 16. Window Watchdog */
+    PVD_IRQHandler,       /* 17. PVD */
+    Default_Handler,      /* 18. TAMPER */
+    Default_Handler,      /* 19. RTC */
+    Default_Handler,      /* 20. FLASH */
+    Default_Handler,      /* 21. RCC */
+    EXTI0_IRQHandler,     /* 22. EXTI Line 0 */
+    EXTI1_IRQHandler,     /* 23. EXTI Line 1 */
+    Default_Handler,      /* 24. EXTI Line 2 */
+    Default_Handler,      /* 25. EXTI Line 3 */
+    Default_Handler,      /* 26. EXTI Line 4 */
+    Default_Handler,      /* 27. DMA1 Channel 1 */
+    Default_Handler,      /* 28. DMA1 Channel 2 */
+    Default_Handler,      /* 29. DMA1 Channel 3 */
+    Default_Handler,      /* 30. DMA1 Channel 4 */
+    Default_Handler,      /* 31. DMA1 Channel 5 */
+    Default_Handler,      /* 32. DMA1 Channel 6 */
+    Default_Handler,      /* 33. DMA1 Channel 7 */
+    Default_Handler,      /* 34. ADC1 & ADC2 */
+    Default_Handler,      /* 35. USB HP / CAN TX */
+    Default_Handler,      /* 36. USB LP / CAN RX0 */
+    Default_Handler,      /* 37. CAN RX1 */
+    Default_Handler,      /* 38. CAN SCE */
+    Default_Handler,      /* 39. EXTI Line 9..5 */
+    Default_Handler,      /* 40. TIM1 Break */
+    Default_Handler,      /* 41. TIM1 Update */
+    Default_Handler,      /* 42. TIM1 Trigger / COM */
+    Default_Handler,      /* 43. TIM1 CC */
+    TIM2_IRQHandler,      /* 44. TIM2 (IRQ28) */
+    TIM3_IRQHandler,      /* 45. TIM3 */
+    Default_Handler,      /* 46. TIM4 */
+    Default_Handler,      /* 47. I2C1 EV */
+    Default_Handler,      /* 48. I2C1 ER */
+    Default_Handler,      /* 49. I2C2 EV */
+    Default_Handler,      /* 50. I2C2 ER */
+    Default_Handler,      /* 51. SPI1 */
+    Default_Handler,      /* 52. SPI2 */
+    USART1_IRQHandler,    /* 53. USART1 (IRQ37) <--- ĐÃ THÊM Ở ĐÂY */
+    Default_Handler,      /* 54. USART2 */
+    Default_Handler,      /* 55. USART3 */
+    EXTI15_10_IRQHandler, /* 56. EXTI Line 15..10 */
     /* ... tiếp tục các IRQ khác ... */
 };

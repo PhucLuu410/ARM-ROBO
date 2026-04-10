@@ -1,55 +1,34 @@
 #include "DSA_RingBuffer.h"
 #include <stdint.h>
 
-#define BUFFER_SIZE 256
-#define MODBUS_FRAME_SIZE 8
-
-volatile int front = 0;
-volatile int rear = 0;
-volatile uint8_t buffer[BUFFER_SIZE] = {0};
-
-void RingBuffer_Push(uint8_t letter)
+void RingBuffer_Push(uint8_t letter, volatile int *front, volatile int *rear, volatile uint8_t *buffer, int buffer_size)
 {
-    int next = (rear + 1) % BUFFER_SIZE;
+    int next = (*rear + 1) % buffer_size;
 
-    if (next != front)
+    if (next != *front)
     {
-        buffer[rear] = letter;
-        rear = next;
+        buffer[*rear] = letter;
+        *rear = next;
     }
 }
 
-int RingBuffer_Available(void)
+int RingBuffer_Available(volatile int *front, volatile int *rear, int buffer_size)
 {
-    if (rear >= front)
-        return (rear - front);
+    if (*rear >= *front)
+        return (*rear - *front);
     else
-        return (BUFFER_SIZE - front + rear);
+        return (buffer_size - *front + *rear);
 }
 
-uint8_t PopFromBuffer(void)
+uint8_t RingBuffer_Pop(volatile int *front, volatile int *rear, volatile uint8_t *buffer, int buffer_size)
 {
-    if (front == rear)
+    if (*front == *rear)
     {
         return 0;
     }
 
-    uint8_t data = buffer[front];
-    front = (front + 1) % BUFFER_SIZE;
+    uint8_t data = buffer[*front];
+    *front = (*front + 1) % buffer_size;
 
     return data;
-}
-
-bool Get_MODBUS_Data(uint8_t *data)
-{
-    if (RingBuffer_Available() != MODBUS_FRAME_SIZE)
-    {
-        front = rear;
-        return false;
-    }
-    for (int i = 0; i < MODBUS_FRAME_SIZE; i++)
-    {
-        data[i] = PopFromBuffer();
-    }
-    return true;
 }

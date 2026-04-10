@@ -5,8 +5,8 @@
 typedef struct
 {
     uint8_t MODBUS_FLAG;
-    uint8_t GPIO_FLAG;
-    uint8_t TIM2_FLAG;
+    uint8_t BUTTON_FLAG;
+    uint8_t EMERGENCY_FLAG;
 } SystemFlag;
 
 typedef enum

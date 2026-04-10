@@ -1,6 +1,13 @@
+#define BUFFER_SIZE 256
+#define MODBUS_FRAME_SIZE 12
+
 #include "BSP_UART.h"
 
-extern SystemFlag main_flag;
+extern SystemFlag Control_Robot_Flag;
+
+volatile int front = 0;
+volatile int rear = 0;
+volatile uint8_t buffer[BUFFER_SIZE] = {0};
 
 void UART_Init(void)
 {
@@ -36,7 +43,7 @@ void USART1_IRQHandler(void)
     if (USART1->SR & (1 << 5)) // RXNE
     {
         uint8_t received_data = (uint8_t)(USART1->DR);
-        RingBuffer_Push(received_data);
+        RingBuffer_Push(received_data, &front, &rear, buffer, BUFFER_SIZE);
     }
     if (USART1->SR & (1 << 4)) // IDLE
     {
@@ -44,6 +51,6 @@ void USART1_IRQHandler(void)
         volatile uint32_t tmp2 = USART1->DR;
         (void)tmp;
         (void)tmp2;
-        main_flag.MODBUS_FLAG = 1;
+        Control_Robot_Flag.MODBUS_FLAG = 1;
     }
 }
