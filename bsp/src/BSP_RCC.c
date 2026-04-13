@@ -20,14 +20,13 @@ void RCC_Init(void)
 
     RCC->AHBENR |= (1 << 0); // DMA1
     RCC->AHBENR |= (1 << 6); // CRC
-
     RCC->APB2ENR |= (1 << 0);  // AFIO
     RCC->APB2ENR |= (1 << 2);  // GPIOA
     RCC->APB2ENR |= (1 << 3);  // GPIOB
     RCC->APB2ENR |= (1 << 4);  // GPIOC
     RCC->APB2ENR |= (1 << 9);  // ADC1
+    RCC->APB2ENR |= (1 << 12); // SPI1
     RCC->APB2ENR |= (1 << 14); // USART1
-
     RCC->APB1ENR |= (1 << 0);  // TIM2
     RCC->APB1ENR |= (1 << 1);  // TIM3
     RCC->APB1ENR |= (1 << 28); // PWR

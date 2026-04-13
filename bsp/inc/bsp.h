@@ -6,5 +6,7 @@
 #include "BSP_TIM.h"
 #include "BSP_EXTI.h"
 #include "BSP_UART.h"
+#include "BSP_DMA.h"
+#include "BSP_SPI.h"
 
 #endif

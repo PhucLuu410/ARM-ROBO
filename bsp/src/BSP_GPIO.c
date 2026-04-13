@@ -1,7 +1,8 @@
 #include "BSP_GPIO.h"
 
 SystemFlag System_GPIO_Flag;
-
+extern uint8_t count;
+uint8_t test;
 void GPIO_Config(GPIO_TypeDef *GPIOx, uint8_t pin, uint8_t mode, uint8_t cnf)
 {
     volatile uint32_t *reg;
@@ -50,13 +51,16 @@ void EXTI15_10_IRQHandler(void)
 {
     if (EXTI->PR & (1 << 11))
     {
-        EXTI->PR |= (1 << 11);
-        System_GPIO_Flag.BUTTON_FLAG = 1;
+        EXTI->PR = (1 << 11);
+        if (System_GPIO_Flag.BUTTON_FLAG == 0)
+        {
+            System_GPIO_Flag.BUTTON_FLAG = 1;
+        }
     }
 
     if (EXTI->PR & (1 << 12))
     {
-        EXTI->PR |= (1 << 12);
+        EXTI->PR = (1 << 12);
         System_GPIO_Flag.EMERGENCY_FLAG = 1;
     }
 }

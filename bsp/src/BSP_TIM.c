@@ -1,13 +1,13 @@
 #include "BSP_TIM.h"
 
-extern uint32_t count;
+volatile uint32_t count = 0;
 
 void TIM2_Init(void)
 {
-    GPIO_Config(GPIOA, 0, 0x1, 0x2);   // Output pp
-    GPIO_Config(GPIOA, 1, 0x1, 0x2);   // Output pp
-    GPIO_Config(GPIOA, 2, 0x1, 0x2);   // Output pp
-    GPIO_Config(GPIOA, 3, 0x1, 0x2);   // Output pp
+    GPIO_Config(GPIOA, 0, 0x3, 0x2); // Output pp
+    GPIO_Config(GPIOA, 1, 0x3, 0x2); // Output pp
+    GPIO_Config(GPIOA, 2, 0x3, 0x2); // Output p
+    GPIO_Config(GPIOA, 3, 0x3, 0x2); // Output pp
 
     TIM2->CR1 |= (1 << 7);             // Auto-reload preload enable
 
@@ -26,12 +26,11 @@ void TIM2_Init(void)
     TIM2->CCER |= (1 << 8);  // CC3E = 1 → enable output CH3
     TIM2->CCER |= (1 << 12); // CC4E = 1 → enable output CH4
 
-
-    // TIM2->DIER |= (1 << 0) | (1 << 1); // Update interrupt enable
+    TIM2->DIER |= (1 << 0) | (1 << 1); // Update interrupt enable
     TIM2->PSC = 7;                     // 8Mhz / 8 = 1Mhz
-    TIM2->ARR = 19999;                   // Count to 1000 -> 1ms 1 UEV
+    TIM2->ARR = 19999;                 // Count to 1000 -> 1ms 1 UEV
 
-    TIM2->CR1 |= (1 << 0);             // Counter enable
+    TIM2->CR1 |= (1 << 0); // Counter enable
 }
 
 void TIM3_Init(void)

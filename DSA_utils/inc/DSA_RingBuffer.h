@@ -8,7 +8,5 @@
 void RingBuffer_Push(uint8_t letter, volatile int *front, volatile int *rear, volatile uint8_t *buffer, int buffer_size);
 uint8_t RingBuffer_Pop(volatile int *front, volatile int *rear, volatile uint8_t *buffer, int buffer_size);
 int RingBuffer_Available(volatile int *front, volatile int *rear, int buffer_size);
-// bool Get_MODBUS_Data(uint8_t *data);
-// void MODBUS_Error_Clear_Frame(void);
 
 #endif
