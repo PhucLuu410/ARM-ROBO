@@ -7,5 +7,6 @@
 
 void SPI_Init(void);
 void SPI_SendByte(uint8_t data);
+void SPI_SendData(uint8_t *data, uint16_t size);
 
 #endif

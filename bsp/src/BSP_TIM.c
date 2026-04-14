@@ -29,8 +29,6 @@ void TIM2_Init(void)
     TIM2->DIER |= (1 << 0) | (1 << 1); // Update interrupt enable
     TIM2->PSC = 7;                     // 8Mhz / 8 = 1Mhz
     TIM2->ARR = 19999;                 // Count to 1000 -> 1ms 1 UEV
-
-    TIM2->CR1 |= (1 << 0); // Counter enable
 }
 
 void TIM3_Init(void)

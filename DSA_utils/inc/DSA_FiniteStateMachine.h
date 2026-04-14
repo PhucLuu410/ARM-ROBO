@@ -4,25 +4,28 @@
 #include <stdint.h>
 typedef struct
 {
-    uint8_t MODBUS_FLAG;
     uint8_t BUTTON_FLAG;
     uint8_t EMERGENCY_FLAG;
 } SystemFlag;
 
 typedef enum
 {
-    STATE_IDLE = 0,
-    STATE_HOMING,
-    STATE_RUNNING,
+    STATE_INIT,
+    STATE_IDLE,
+    STATE_RUNNING_MODE,
     STATE_ERROR
+
 } SystemState;
 
 typedef enum
 {
-    EVENT_NONE = 0,
-    EVENT_MODBUS_RECEIVED,
-    EVENT_EMERGENCY_TRIGGERED,
-    EVENT_TIM2_TICK
+    EVENT_NONE,
+    EVENT_IDLE,
+    EVENT_EMERGENCY_PRESS,
+    EVENT_BUTTON_PRESS,
 } SystemEvent;
+
+SystemState FSM_Get_Next_State(SystemState current_state, SystemEvent event);
+void FSM_Handle_State(SystemState state);
 
 #endif

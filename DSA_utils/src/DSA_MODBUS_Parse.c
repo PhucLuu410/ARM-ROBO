@@ -8,7 +8,7 @@ extern volatile int rear;
 extern volatile uint8_t buffer[BUFFER_SIZE];
 
 uint16_t CRC_Check = 0;
-extern SystemFlag Control_Robot_Flag;
+extern uint8_t MODBUS_FLAG;
 uint8_t request_buffer[12];
 
 __attribute__((section(".custom_buffer"))) ModbusRequest request;
@@ -35,13 +35,13 @@ uint16_t MODBUS_CRC_Check(uint8_t *buf, int len)
 
 void MODBUS_Parse_Request(void)
 {
-    if (Control_Robot_Flag.MODBUS_FLAG == 1)
+    if (MODBUS_FLAG == 1)
     {
         Get_MODBUS_Data(request_buffer);
         uint16_t CRC_Check = MODBUS_CRC_Check(request_buffer, 10);
         if (CRC_Check != ((request_buffer[10] << 8) | request_buffer[11]))
         {
-            Control_Robot_Flag.MODBUS_FLAG = 0;
+            MODBUS_FLAG = 0;
             return;
         }
         request.slave_addr = request_buffer[0];
@@ -51,7 +51,7 @@ void MODBUS_Parse_Request(void)
         request.servo_3 = (request_buffer[6] << 8) | request_buffer[7];
         request.servo_4 = (request_buffer[8] << 8) | request_buffer[9];
         request.crc = (request_buffer[10] << 8) | request_buffer[11];
-        Control_Robot_Flag.MODBUS_FLAG = 0;
+        MODBUS_FLAG = 0;
     }
 }
 

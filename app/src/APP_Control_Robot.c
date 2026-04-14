@@ -5,10 +5,9 @@ uint16_t *reg_data2 = (uint16_t *)0x20000004;
 uint16_t *reg_data3 = (uint16_t *)0x20000006;
 uint16_t *reg_data4 = (uint16_t *)0x20000008;
 
-SystemFlag Control_Robot_Flag;
-
 void Arm_Start(void)
 {
+    TIM2->CR1 |= (1 << 0);
     MODBUS_Parse_Request();
 
     TIM2_PWM_CH1_Change_Duty(*reg_data1);
@@ -18,6 +17,7 @@ void Arm_Start(void)
 }
 void Arm_Stop(void)
 {
+    TIM2->CR1 &= ~(1 << 0);
     TIM2_PWM_CH1_Change_Duty(0);
     TIM2_PWM_CH2_Change_Duty(0);
     TIM2_PWM_CH3_Change_Duty(0);

@@ -1,0 +1,40 @@
+#ifndef __MAX7219_H
+#define __MAX7219_H
+
+#include "bsp.h"
+#include "stdint.h"
+
+#define MAX7219_REG_NOOP 0x00
+#define MAX7219_REG_DIGIT0 0x01
+#define MAX7219_REG_DIGIT1 0x02
+#define MAX7219_REG_DIGIT2 0x03
+#define MAX7219_REG_DIGIT3 0x04
+#define MAX7219_REG_DIGIT4 0x05
+#define MAX7219_REG_DIGIT5 0x06
+#define MAX7219_REG_DIGIT6 0x07
+#define MAX7219_REG_DIGIT7 0x08
+#define MAX7219_REG_DECODEMODE 0x09
+#define MAX7219_REG_INTENSITY 0x0A
+#define MAX7219_REG_SCANLIMIT 0x0B
+#define MAX7219_REG_SHUTDOWN 0x0C
+#define MAX7219_REG_DISPLAYTEST 0x0F
+
+#define MAX7219_DATA_SHUTDOWN_MODE 0x00
+#define MAX7219_DATA_NORMAL_MODE 0x01
+#define MAX7219_DATA_DECODE_NONE 0x00
+#define MAX7219_DATA_DECODE_ALL 0xFF
+
+#define MAX7219_BRIGHTNESS_MIN 0x00
+#define MAX7219_BRIGHTNESS_MEDIUM 0x07
+#define MAX7219_BRIGHTNESS_MAX 0x0F
+
+#define MAX7219_SCAN_LIMIT_FORMAT 0x07
+
+void MAX7219_Init(void);
+void MAX7219_SetBrightness(uint8_t brightness);
+void MAX7219_DisplayDigit(uint8_t digit, uint8_t value);
+void MAX7219_DisplayNumber(int number);
+void MAX7219_Clear(void);
+void MAX7219_DisplayTest(void);
+
+#endif

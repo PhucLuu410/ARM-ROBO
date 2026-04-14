@@ -3,7 +3,7 @@
 
 #include "BSP_UART.h"
 
-extern SystemFlag Control_Robot_Flag;
+uint8_t MODBUS_FLAG = 0;
 
 volatile int front = 0;
 volatile int rear = 0;
@@ -50,6 +50,6 @@ void USART1_IRQHandler(void)
         volatile uint32_t tmp2 = USART1->DR;
         (void)tmp;
         (void)tmp2;
-        Control_Robot_Flag.MODBUS_FLAG = 1;
+        MODBUS_FLAG = 1;
     }
 }

@@ -1,5 +1,6 @@
 #include "DSA_Schedule.h"
 
+extern SystemEvent current_event;
 Schedule_Task schedule_tasks[10];
 uint8_t task_count = 0;
 extern volatile uint32_t count;
@@ -15,6 +16,7 @@ void SCHEDULE_Create_Task(void (*task_function)(void), uint32_t period)
 }
 void SCHEDULE_Run(void)
 {
+    current_event = EVENT_NONE;
     uint32_t current_time = count;
     for (uint8_t i = 0; i < task_count; i++)
     {

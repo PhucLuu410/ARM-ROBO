@@ -13,4 +13,12 @@ void Arm_Init(void);
 void Arm_Start(void);
 void Arm_Stop(void);
 
+//Display
+void Display_Init(void);
+void Display_ShowError(void);
+void Display_ShowMode1(void);
+void Display_ShowMode2(void);
+void Display_ShowStop(void);
+
+
 #endif

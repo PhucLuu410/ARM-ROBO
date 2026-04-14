@@ -1,6 +1,7 @@
 #include "main.h"
-extern SystemFlag Control_Robot_Flag;
-uint8_t check = 0;
+
+SystemState current_state = STATE_INIT;
+SystemEvent current_event = EVENT_NONE;
 
 int main(void)
 {
@@ -12,9 +13,12 @@ int main(void)
     SPI_Init();
     Arm_Init();
     Button_Init();
+    Display_Init();
+    current_state = STATE_IDLE;
     while (1)
     {
         SCHEDULE_Run();
-        SPI_SendByte(0x55); // Send a test byte to the SPI device
+        current_state = FSM_Get_Next_State(current_state, current_event);
+        FSM_Handle_State(current_state);
     }
 }

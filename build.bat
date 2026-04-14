@@ -8,7 +8,7 @@ set OBJCOPY=arm-none-eabi-objcopy
 REM ===== Flags (THÊM -DSTM32F103xB Ở ĐÂY) =====
 set CFLAGS=-c -mcpu=cortex-m3 -mthumb -g -O0 -DSTM32F103xB 
 set LDFLAGS=-T system/linker/STM32F103C8T6_Linker.ld -g -nostdlib
-set INCLUDES=-I./system/CMSIS -I./bsp/inc -I./main/inc -I./app/inc -I./DSA_utils/inc
+set INCLUDES=-I./system/CMSIS -I./bsp/inc -I./main/inc -I./app/inc -I./DSA_utils/inc -I./library/inc
 
 REM ===== Thư mục đầu ra =====
 set BUILD_DIR=system/build
