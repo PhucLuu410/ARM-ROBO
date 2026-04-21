@@ -8,5 +8,6 @@
 #include "BSP_UART.h"
 #include "BSP_DMA.h"
 #include "BSP_SPI.h"
+#include "BSP_ADC.h"
 
 #endif

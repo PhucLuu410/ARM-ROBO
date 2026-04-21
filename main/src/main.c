@@ -1,8 +1,9 @@
-#include "main.h"
+// #include "main.h"
+#include "DSA.h"
+#include "APP.h"
 
 SystemState current_state = STATE_INIT;
 SystemEvent current_event = EVENT_NONE;
-
 int main(void)
 {
     RCC_Init();
@@ -11,6 +12,8 @@ int main(void)
     EXTI_Init();
     UART_Init();
     SPI_Init();
+    DMA_Init();
+    ADC_Init();
     Arm_Init();
     Button_Init();
     Display_Init();
@@ -22,3 +25,4 @@ int main(void)
         FSM_Handle_State(current_state);
     }
 }
+

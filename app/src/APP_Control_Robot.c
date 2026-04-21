@@ -18,13 +18,9 @@ void Arm_Start(void)
 void Arm_Stop(void)
 {
     TIM2->CR1 &= ~(1 << 0);
-    TIM2_PWM_CH1_Change_Duty(0);
-    TIM2_PWM_CH2_Change_Duty(0);
-    TIM2_PWM_CH3_Change_Duty(0);
-    TIM2_PWM_CH4_Change_Duty(0);
 }
 
 void Arm_Init(void)
 {
-    SCHEDULE_Create_Task(&Arm_Start, 2);
+    SCHEDULE_Create_Task(&Arm_Start, 3);
 }

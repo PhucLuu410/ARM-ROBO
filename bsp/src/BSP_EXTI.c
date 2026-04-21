@@ -16,4 +16,5 @@ void EXTI_Init(void)
     NVIC_EnableIRQ(TIM2_IRQn);
     NVIC_EnableIRQ(TIM3_IRQn);
     NVIC_EnableIRQ(EXTI15_10_IRQn);
+    NVIC_EnableIRQ(ADC1_IRQn);
 }
