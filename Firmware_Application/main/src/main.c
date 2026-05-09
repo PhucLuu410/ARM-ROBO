@@ -6,6 +6,7 @@ SystemState current_state = STATE_INIT;
 SystemEvent current_event = EVENT_NONE;
 int main(void)
 {
+
     SCB->VTOR = 0x08001000;
     __enable_irq();
     RCC_Init();

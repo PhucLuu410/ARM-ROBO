@@ -3,6 +3,9 @@
 
 extern SystemFlag System_GPIO_Flag;
 extern SystemEvent current_event;
+extern ModbusRequest request;
+ModbusRequest save_data[4];
+uint16_t save_data_index = 0;
 uint8_t press = 0;
 
 void Button_Pressed(void)
@@ -22,9 +25,21 @@ void Button_Pressed(void)
             break;
         case 2:
             Display_ShowMode2();
+            while (1)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    TIM2_PWM_CH1_Change_Duty(save_data[i].servo_1);
+                    TIM2_PWM_CH2_Change_Duty(save_data[i].servo_2);
+                    TIM2_PWM_CH3_Change_Duty(save_data[i].servo_3);
+                    TIM2_PWM_CH4_Change_Duty(save_data[i].servo_4);
+                    for (int j = 0; j < 1000000; j++)
+                        ;
+                }
+            }
             break;
         default:
-            Display_ShowStop();
+            break;
         }
     }
 }
@@ -43,10 +58,30 @@ void Emergency_Button_Pressed(void)
         }
     }
 }
+static void Save_Button_Led(void)
+{
+    GPIO_Config(GPIOA, 4, GPIO_MODE_OUTPUT_10M, GPIO_CNF_GP_PP);
+    GPIO_TogglePin(GPIOA, 4);
+}
+
+void Save_Button_State(void)
+{
+    if (System_GPIO_Flag.SAVE_FLAG == 1)
+    {
+        System_GPIO_Flag.SAVE_FLAG = 0;
+        current_event = EVENT_SAVE_PRESS;
+        Save_Button_Led();
+        save_data[save_data_index] = request;
+        save_data_index = (save_data_index + 1) % 4;
+    }
+}
+
 void Button_Init(void)
 {
     System_GPIO_Flag.BUTTON_FLAG = 0;
     System_GPIO_Flag.EMERGENCY_FLAG = 0;
+    System_GPIO_Flag.SAVE_FLAG = 0;
     SCHEDULE_Create_Task(&Button_Pressed, 10);
     SCHEDULE_Create_Task(&Emergency_Button_Pressed, 1);
+    SCHEDULE_Create_Task(&Save_Button_State, 7);
 }

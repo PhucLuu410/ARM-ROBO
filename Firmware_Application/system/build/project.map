@@ -40,140 +40,141 @@ LOAD system\build\system\startup\STM32F103C8T6_StartUp.o
                 0x08001000                g_pfnVectors
                 0x080010e4                        . = ALIGN (0x4)
 
-.text           0x080010e4     0x15d4
+.text           0x080010e4     0x18fc
                 0x080010e4                        . = ALIGN (0x4)
  *(.text)
  .text          0x080010e4       0x8c system\build\app\src\APP_Control_Robot.o
                 0x080010e4                Arm_Start
                 0x08001140                Arm_Stop
                 0x0800115c                Arm_Init
- .text          0x08001170      0x1c4 system\build\app\src\App_Display.o
+ .text          0x08001170      0x358 system\build\app\src\App_Display.o
                 0x08001170                Display_ShowError
-                0x080011dc                Display_ShowMode1
-                0x08001244                Display_ShowMode2
-                0x080012b0                Display_ShowStop
-                0x0800131c                Display_Init
- .text          0x08001334        0x0 system\build\app\src\APP_ReadCurrent.o
- .text          0x08001334       0xec system\build\app\src\APP_Read_Button.o
-                0x08001334                Button_Pressed
-                0x080013ac                Emergency_Button_Pressed
-                0x080013f0                Button_Init
- .text          0x08001420       0xbc system\build\bsp\src\BSP_ADC.o
-                0x08001420                ADC_Init
-                0x080014c8                ADC_GetAddressValueBuffer
- .text          0x080014dc       0x74 system\build\bsp\src\BSP_DMA.o
-                0x080014dc                DMA_Init
- .text          0x08001550       0xcc system\build\bsp\src\BSP_EXTI.o
-                0x08001588                EXTI_Init
- .text          0x0800161c      0x164 system\build\bsp\src\BSP_GPIO.o
-                0x0800161c                GPIO_Config
-                0x0800168e                GPIO_WritePin
-                0x080016cc                GPIO_TogglePin
-                0x080016f4                GPIO_Test_Polling_Live
-                0x08001730                EXTI15_10_IRQHandler
- .text          0x08001780      0x110 system\build\bsp\src\BSP_RCC.o
-                0x08001780                RCC_Init
-                0x08001888                HardFault_Handler
- .text          0x08001890      0x16c system\build\bsp\src\BSP_SPI.o
-                0x08001890                SPI_Init
-                0x0800195c                SPI_SendByte
-                0x0800199c                SPI_SendData
- .text          0x080019fc      0x338 system\build\bsp\src\BSP_TIM.o
-                0x080019fc                TIM2_Init
-                0x08001b2c                TIM3_Init
-                0x08001b70                TIM3_Start
-                0x08001b8c                TIM3_Stop
-                0x08001ba8                TIM3_ResetCount
-                0x08001bc0                TIM2_PWM_CH1_Change_Duty
-                0x08001bdc                TIM2_PWM_CH2_Change_Duty
-                0x08001bf8                TIM2_PWM_CH3_Change_Duty
-                0x08001c14                TIM2_PWM_CH4_Change_Duty
-                0x08001c30                TIM2_Change_Period
-                0x08001c4c                TIM2_Change_Frequency
-                0x08001ca0                TIM2_IRQHandler
-                0x08001ce8                TIM3_IRQHandler
- .text          0x08001d34      0x11c system\build\bsp\src\BSP_UART.o
-                0x08001d34                UART_Init
-                0x08001d90                UART_SendData
-                0x08001dbc                UART_SendString
-                0x08001de8                USART1_IRQHandler
- .text          0x08001e50       0xb6 system\build\DSA_utils\src\DSA_FiniteStateMachine.o
-                0x08001e50                FSM_Get_Next_State
-                0x08001ec0                FSM_Handle_State
- *fill*         0x08001f06        0x2 
- .text          0x08001f08      0x1c0 system\build\DSA_utils\src\DSA_MODBUS_Parse.o
-                0x08001f08                MODBUS_CRC_Check
-                0x08001f7c                MODBUS_Parse_Request
-                0x08002060                Get_MODBUS_Data
- .text          0x080020c8       0xda system\build\DSA_utils\src\DSA_RingBuffer.o
-                0x080020c8                RingBuffer_Push
-                0x08002116                RingBuffer_Available
-                0x08002152                RingBuffer_Pop
- *fill*         0x080021a2        0x2 
- .text          0x080021a4      0x10c system\build\DSA_utils\src\DSA_Schedule.o
-                0x080021a4                SCHEDULE_Create_Task
-                0x0800221c                SCHEDULE_Run
- .text          0x080022b0      0x174 system\build\library\src\MAX7219.o
-                0x080022b0                MAX7219_Init
-                0x08002310                MAX7219_SetBrightness
-                0x08002340                MAX7219_DisplayDigit
-                0x08002378                MAX7219_DisplayNumber
-                0x080023d4                MAX7219_Clear
-                0x08002400                MAX7219_DisplayTest
- .text          0x08002424       0x78 system\build\main\src\main.o
-                0x08002424                main
- .text          0x0800249c       0xf0 system\build\system\CMSIS\system_stm32f1xx.o
-                0x0800249c                SystemInit
-                0x080024a8                SystemCoreClockUpdate
- .text          0x0800258c       0x70 system\build\system\src\syscalls.o
-                0x0800258c                _sbrk
-                0x080025e8                __errno
- .text          0x080025fc       0x94 system\build\system\startup\STM32F103C8T6_StartUp.o
-                0x080025fc                Reset_Handler
-                0x08002688                SysTick_Handler
-                0x08002688                PVD_IRQHandler
-                0x08002688                PendSV_Handler
-                0x08002688                NMI_Handler
-                0x08002688                EXTI0_IRQHandler
-                0x08002688                UsageFault_Handler
-                0x08002688                ADC1_2_IRQHandler
-                0x08002688                DebugMon_Handler
-                0x08002688                Default_Handler
-                0x08002688                MemManage_Handler
-                0x08002688                SVC_Handler
-                0x08002688                WWDG_IRQHandler
-                0x08002688                EXTI1_IRQHandler
-                0x08002688                BusFault_Handler
+                0x08001240                Display_ShowMode1
+                0x08001310                Display_ShowMode2
+                0x080013e0                Display_ShowStop
+                0x080014b0                Display_Init
+ .text          0x080014c8        0x0 system\build\app\src\APP_ReadCurrent.o
+ .text          0x080014c8      0x21c system\build\app\src\APP_Read_Button.o
+                0x080014c8                Button_Pressed
+                0x080015d0                Emergency_Button_Pressed
+                0x08001634                Save_Button_State
+                0x080016a0                Button_Init
+ .text          0x080016e4       0xbc system\build\bsp\src\BSP_ADC.o
+                0x080016e4                ADC_Init
+                0x0800178c                ADC_GetAddressValueBuffer
+ .text          0x080017a0       0x74 system\build\bsp\src\BSP_DMA.o
+                0x080017a0                DMA_Init
+ .text          0x08001814      0x104 system\build\bsp\src\BSP_EXTI.o
+                0x0800184c                EXTI_Init
+ .text          0x08001918      0x190 system\build\bsp\src\BSP_GPIO.o
+                0x08001918                GPIO_Config
+                0x0800198a                GPIO_WritePin
+                0x080019c8                GPIO_TogglePin
+                0x080019f0                GPIO_Test_Polling_Live
+                0x08001a2c                EXTI15_10_IRQHandler
+                0x08001a7c                EXTI0_IRQHandler
+ .text          0x08001aa8      0x110 system\build\bsp\src\BSP_RCC.o
+                0x08001aa8                RCC_Init
+                0x08001bb0                HardFault_Handler
+ .text          0x08001bb8      0x16c system\build\bsp\src\BSP_SPI.o
+                0x08001bb8                SPI_Init
+                0x08001c84                SPI_SendByte
+                0x08001cc4                SPI_SendData
+ .text          0x08001d24      0x338 system\build\bsp\src\BSP_TIM.o
+                0x08001d24                TIM2_Init
+                0x08001e54                TIM3_Init
+                0x08001e98                TIM3_Start
+                0x08001eb4                TIM3_Stop
+                0x08001ed0                TIM3_ResetCount
+                0x08001ee8                TIM2_PWM_CH1_Change_Duty
+                0x08001f04                TIM2_PWM_CH2_Change_Duty
+                0x08001f20                TIM2_PWM_CH3_Change_Duty
+                0x08001f3c                TIM2_PWM_CH4_Change_Duty
+                0x08001f58                TIM2_Change_Period
+                0x08001f74                TIM2_Change_Frequency
+                0x08001fc8                TIM2_IRQHandler
+                0x08002010                TIM3_IRQHandler
+ .text          0x0800205c      0x11c system\build\bsp\src\BSP_UART.o
+                0x0800205c                UART_Init
+                0x080020b8                UART_SendData
+                0x080020e4                UART_SendString
+                0x08002110                USART1_IRQHandler
+ .text          0x08002178       0xb6 system\build\DSA_utils\src\DSA_FiniteStateMachine.o
+                0x08002178                FSM_Get_Next_State
+                0x080021e8                FSM_Handle_State
+ *fill*         0x0800222e        0x2 
+ .text          0x08002230      0x1c0 system\build\DSA_utils\src\DSA_MODBUS_Parse.o
+                0x08002230                MODBUS_CRC_Check
+                0x080022a4                MODBUS_Parse_Request
+                0x08002388                Get_MODBUS_Data
+ .text          0x080023f0       0xda system\build\DSA_utils\src\DSA_RingBuffer.o
+                0x080023f0                RingBuffer_Push
+                0x0800243e                RingBuffer_Available
+                0x0800247a                RingBuffer_Pop
+ *fill*         0x080024ca        0x2 
+ .text          0x080024cc      0x10c system\build\DSA_utils\src\DSA_Schedule.o
+                0x080024cc                SCHEDULE_Create_Task
+                0x08002544                SCHEDULE_Run
+ .text          0x080025d8      0x174 system\build\library\src\MAX7219.o
+                0x080025d8                MAX7219_Init
+                0x08002638                MAX7219_SetBrightness
+                0x08002668                MAX7219_DisplayDigit
+                0x080026a0                MAX7219_DisplayNumber
+                0x080026fc                MAX7219_Clear
+                0x08002728                MAX7219_DisplayTest
+ .text          0x0800274c       0x78 system\build\main\src\main.o
+                0x0800274c                main
+ .text          0x080027c4       0xf0 system\build\system\CMSIS\system_stm32f1xx.o
+                0x080027c4                SystemInit
+                0x080027d0                SystemCoreClockUpdate
+ .text          0x080028b4       0x70 system\build\system\src\syscalls.o
+                0x080028b4                _sbrk
+                0x08002910                __errno
+ .text          0x08002924       0x94 system\build\system\startup\STM32F103C8T6_StartUp.o
+                0x08002924                Reset_Handler
+                0x080029b0                SysTick_Handler
+                0x080029b0                PVD_IRQHandler
+                0x080029b0                PendSV_Handler
+                0x080029b0                NMI_Handler
+                0x080029b0                UsageFault_Handler
+                0x080029b0                ADC1_2_IRQHandler
+                0x080029b0                DebugMon_Handler
+                0x080029b0                Default_Handler
+                0x080029b0                MemManage_Handler
+                0x080029b0                SVC_Handler
+                0x080029b0                WWDG_IRQHandler
+                0x080029b0                EXTI1_IRQHandler
+                0x080029b0                BusFault_Handler
  *(.text*)
  *(.rodata)
- .rodata        0x08002690        0xe system\build\library\src\MAX7219.o
- *fill*         0x0800269e        0x2 
- .rodata        0x080026a0       0x18 system\build\system\CMSIS\system_stm32f1xx.o
-                0x080026a0                AHBPrescTable
-                0x080026b0                APBPrescTable
+ .rodata        0x080029b8        0xe system\build\library\src\MAX7219.o
+ *fill*         0x080029c6        0x2 
+ .rodata        0x080029c8       0x18 system\build\system\CMSIS\system_stm32f1xx.o
+                0x080029c8                AHBPrescTable
+                0x080029d8                APBPrescTable
  *(.rodata*)
-                0x080026b8                        . = ALIGN (0x4)
-                0x080026b8                        _etext = .
+                0x080029e0                        . = ALIGN (0x4)
+                0x080029e0                        _etext = .
 
-.glue_7         0x080026b8        0x0
- .glue_7        0x080026b8        0x0 linker stubs
+.glue_7         0x080029e0        0x0
+ .glue_7        0x080029e0        0x0 linker stubs
 
-.glue_7t        0x080026b8        0x0
- .glue_7t       0x080026b8        0x0 linker stubs
+.glue_7t        0x080029e0        0x0
+ .glue_7t       0x080029e0        0x0 linker stubs
 
-.vfp11_veneer   0x080026b8        0x0
- .vfp11_veneer  0x080026b8        0x0 linker stubs
+.vfp11_veneer   0x080029e0        0x0
+ .vfp11_veneer  0x080029e0        0x0 linker stubs
 
-.v4_bx          0x080026b8        0x0
- .v4_bx         0x080026b8        0x0 linker stubs
+.v4_bx          0x080029e0        0x0
+ .v4_bx         0x080029e0        0x0 linker stubs
 
-.iplt           0x080026b8        0x0
- .iplt          0x080026b8        0x0 system\build\app\src\APP_Control_Robot.o
+.iplt           0x080029e0        0x0
+ .iplt          0x080029e0        0x0 system\build\app\src\APP_Control_Robot.o
 
-.rel.dyn        0x080026b8        0x0
- .rel.iplt      0x080026b8        0x0 system\build\app\src\APP_Control_Robot.o
+.rel.dyn        0x080029e0        0x0
+ .rel.iplt      0x080029e0        0x0 system\build\app\src\APP_Control_Robot.o
 
-.data           0x20001000       0x34 load address 0x080026b8
+.data           0x20001000       0x34 load address 0x080029e0
                 0x20001000                        . = ALIGN (0x4)
                 0x20001000                        _sdata = .
  *(.data)
@@ -210,57 +211,60 @@ LOAD system\build\system\startup\STM32F103C8T6_StartUp.o
  *(.data*)
                 0x20001034                        . = ALIGN (0x4)
                 0x20001034                        _edata = .
-                0x080026b8                        _sidata = LOADADDR (.data)
+                0x080029e0                        _sidata = LOADADDR (.data)
 
-.igot.plt       0x20001034        0x0 load address 0x080026ec
+.igot.plt       0x20001034        0x0 load address 0x08002a14
  .igot.plt      0x20001034        0x0 system\build\app\src\APP_Control_Robot.o
 
-.bss            0x20001034      0x1ac load address 0x080026ec
+.bss            0x20001034      0x1e8 load address 0x08002a14
                 0x20001034                        . = ALIGN (0x4)
                 0x20001034                        _sbss = .
  *(.bss)
  .bss           0x20001034        0x0 system\build\app\src\APP_Control_Robot.o
- .bss           0x20001034        0x0 system\build\app\src\App_Display.o
- .bss           0x20001034        0x0 system\build\app\src\APP_ReadCurrent.o
- .bss           0x20001034        0x1 system\build\app\src\APP_Read_Button.o
-                0x20001034                press
- *fill*         0x20001035        0x1 
- .bss           0x20001036        0x2 system\build\bsp\src\BSP_ADC.o
- .bss           0x20001038        0x0 system\build\bsp\src\BSP_DMA.o
- .bss           0x20001038        0x0 system\build\bsp\src\BSP_EXTI.o
- .bss           0x20001038        0x3 system\build\bsp\src\BSP_GPIO.o
-                0x20001038                System_GPIO_Flag
-                0x2000103a                test
- .bss           0x2000103b        0x0 system\build\bsp\src\BSP_RCC.o
- .bss           0x2000103b        0x0 system\build\bsp\src\BSP_SPI.o
- *fill*         0x2000103b        0x1 
- .bss           0x2000103c        0x4 system\build\bsp\src\BSP_TIM.o
-                0x2000103c                count
- .bss           0x20001040      0x10c system\build\bsp\src\BSP_UART.o
-                0x20001040                MODBUS_FLAG
-                0x20001044                front
-                0x20001048                rear
-                0x2000104c                buffer
- .bss           0x2000114c        0x0 system\build\DSA_utils\src\DSA_FiniteStateMachine.o
- .bss           0x2000114c       0x10 system\build\DSA_utils\src\DSA_MODBUS_Parse.o
-                0x2000114c                CRC_Check
-                0x20001150                request_buffer
- .bss           0x2000115c        0x0 system\build\DSA_utils\src\DSA_RingBuffer.o
- .bss           0x2000115c       0x79 system\build\DSA_utils\src\DSA_Schedule.o
-                0x2000115c                schedule_tasks
-                0x200011d4                task_count
- .bss           0x200011d5        0x0 system\build\library\src\MAX7219.o
- .bss           0x200011d5        0x2 system\build\main\src\main.o
-                0x200011d5                current_state
-                0x200011d6                current_event
- .bss           0x200011d7        0x0 system\build\system\CMSIS\system_stm32f1xx.o
- *fill*         0x200011d7        0x1 
- .bss           0x200011d8        0x8 system\build\system\src\syscalls.o
- .bss           0x200011e0        0x0 system\build\system\startup\STM32F103C8T6_StartUp.o
+ .bss           0x20001034        0x8 system\build\app\src\App_Display.o
+                0x20001034                Reset_String
+ .bss           0x2000103c        0x0 system\build\app\src\APP_ReadCurrent.o
+ .bss           0x2000103c       0x33 system\build\app\src\APP_Read_Button.o
+                0x2000103c                save_data
+                0x2000106c                save_data_index
+                0x2000106e                press
+ *fill*         0x2000106f        0x1 
+ .bss           0x20001070        0x2 system\build\bsp\src\BSP_ADC.o
+ .bss           0x20001072        0x0 system\build\bsp\src\BSP_DMA.o
+ .bss           0x20001072        0x0 system\build\bsp\src\BSP_EXTI.o
+ *fill*         0x20001072        0x2 
+ .bss           0x20001074        0x4 system\build\bsp\src\BSP_GPIO.o
+                0x20001074                System_GPIO_Flag
+                0x20001077                test
+ .bss           0x20001078        0x0 system\build\bsp\src\BSP_RCC.o
+ .bss           0x20001078        0x0 system\build\bsp\src\BSP_SPI.o
+ .bss           0x20001078        0x4 system\build\bsp\src\BSP_TIM.o
+                0x20001078                count
+ .bss           0x2000107c      0x10c system\build\bsp\src\BSP_UART.o
+                0x2000107c                MODBUS_FLAG
+                0x20001080                front
+                0x20001084                rear
+                0x20001088                buffer
+ .bss           0x20001188        0x0 system\build\DSA_utils\src\DSA_FiniteStateMachine.o
+ .bss           0x20001188       0x10 system\build\DSA_utils\src\DSA_MODBUS_Parse.o
+                0x20001188                CRC_Check
+                0x2000118c                request_buffer
+ .bss           0x20001198        0x0 system\build\DSA_utils\src\DSA_RingBuffer.o
+ .bss           0x20001198       0x79 system\build\DSA_utils\src\DSA_Schedule.o
+                0x20001198                schedule_tasks
+                0x20001210                task_count
+ .bss           0x20001211        0x0 system\build\library\src\MAX7219.o
+ .bss           0x20001211        0x2 system\build\main\src\main.o
+                0x20001211                current_state
+                0x20001212                current_event
+ .bss           0x20001213        0x0 system\build\system\CMSIS\system_stm32f1xx.o
+ *fill*         0x20001213        0x1 
+ .bss           0x20001214        0x8 system\build\system\src\syscalls.o
+ .bss           0x2000121c        0x0 system\build\system\startup\STM32F103C8T6_StartUp.o
  *(.bss*)
  *(COMMON)
-                0x200011e0                        . = ALIGN (0x4)
-                0x200011e0                        _ebss = .
+                0x2000121c                        . = ALIGN (0x4)
+                0x2000121c                        _ebss = .
 
 .custom_buffer  0x20000000        0xc
                 0x20000000                        . = ALIGN (0x4)
@@ -276,49 +280,49 @@ LOAD system\build\system\startup\STM32F103C8T6_StartUp.o
 OUTPUT(system/build\project.elf elf32-littlearm)
 LOAD linker stubs
 
-.debug_info     0x00000000     0x309c
+.debug_info     0x00000000     0x325c
  .debug_info    0x00000000      0x2af system\build\app\src\APP_Control_Robot.o
- .debug_info    0x000002af      0x160 system\build\app\src\App_Display.o
- .debug_info    0x0000040f      0x247 system\build\app\src\APP_Read_Button.o
- .debug_info    0x00000656      0x285 system\build\bsp\src\BSP_ADC.o
- .debug_info    0x000008db      0x1f0 system\build\bsp\src\BSP_DMA.o
- .debug_info    0x00000acb      0x4e1 system\build\bsp\src\BSP_EXTI.o
- .debug_info    0x00000fac      0x2e3 system\build\bsp\src\BSP_GPIO.o
- .debug_info    0x0000128f      0x147 system\build\bsp\src\BSP_RCC.o
- .debug_info    0x000013d6      0x2e5 system\build\bsp\src\BSP_SPI.o
- .debug_info    0x000016bb      0x3d7 system\build\bsp\src\BSP_TIM.o
- .debug_info    0x00001a92      0x2f1 system\build\bsp\src\BSP_UART.o
- .debug_info    0x00001d83      0x159 system\build\DSA_utils\src\DSA_FiniteStateMachine.o
- .debug_info    0x00001edc      0x2d8 system\build\DSA_utils\src\DSA_MODBUS_Parse.o
- .debug_info    0x000021b4      0x1b2 system\build\DSA_utils\src\DSA_RingBuffer.o
- .debug_info    0x00002366      0x1d6 system\build\DSA_utils\src\DSA_Schedule.o
- .debug_info    0x0000253c      0x1a0 system\build\library\src\MAX7219.o
- .debug_info    0x000026dc      0x382 system\build\main\src\main.o
- .debug_info    0x00002a5e      0x217 system\build\system\CMSIS\system_stm32f1xx.o
- .debug_info    0x00002c75      0x116 system\build\system\src\syscalls.o
- .debug_info    0x00002d8b      0x311 system\build\system\startup\STM32F103C8T6_StartUp.o
+ .debug_info    0x000002af      0x170 system\build\app\src\App_Display.o
+ .debug_info    0x0000041f      0x3cc system\build\app\src\APP_Read_Button.o
+ .debug_info    0x000007eb      0x285 system\build\bsp\src\BSP_ADC.o
+ .debug_info    0x00000a70      0x1f0 system\build\bsp\src\BSP_DMA.o
+ .debug_info    0x00000c60      0x4e1 system\build\bsp\src\BSP_EXTI.o
+ .debug_info    0x00001141      0x2fc system\build\bsp\src\BSP_GPIO.o
+ .debug_info    0x0000143d      0x147 system\build\bsp\src\BSP_RCC.o
+ .debug_info    0x00001584      0x2e5 system\build\bsp\src\BSP_SPI.o
+ .debug_info    0x00001869      0x3d7 system\build\bsp\src\BSP_TIM.o
+ .debug_info    0x00001c40      0x2f1 system\build\bsp\src\BSP_UART.o
+ .debug_info    0x00001f31      0x15f system\build\DSA_utils\src\DSA_FiniteStateMachine.o
+ .debug_info    0x00002090      0x2d8 system\build\DSA_utils\src\DSA_MODBUS_Parse.o
+ .debug_info    0x00002368      0x1b2 system\build\DSA_utils\src\DSA_RingBuffer.o
+ .debug_info    0x0000251a      0x1dc system\build\DSA_utils\src\DSA_Schedule.o
+ .debug_info    0x000026f6      0x1a0 system\build\library\src\MAX7219.o
+ .debug_info    0x00002896      0x388 system\build\main\src\main.o
+ .debug_info    0x00002c1e      0x217 system\build\system\CMSIS\system_stm32f1xx.o
+ .debug_info    0x00002e35      0x116 system\build\system\src\syscalls.o
+ .debug_info    0x00002f4b      0x311 system\build\system\startup\STM32F103C8T6_StartUp.o
 
-.debug_abbrev   0x00000000     0x15c4
+.debug_abbrev   0x00000000     0x1634
  .debug_abbrev  0x00000000      0x10e system\build\app\src\APP_Control_Robot.o
  .debug_abbrev  0x0000010e       0xac system\build\app\src\App_Display.o
- .debug_abbrev  0x000001ba      0x147 system\build\app\src\APP_Read_Button.o
- .debug_abbrev  0x00000301      0x123 system\build\bsp\src\BSP_ADC.o
- .debug_abbrev  0x00000424       0xe5 system\build\bsp\src\BSP_DMA.o
- .debug_abbrev  0x00000509      0x15d system\build\bsp\src\BSP_EXTI.o
- .debug_abbrev  0x00000666      0x158 system\build\bsp\src\BSP_GPIO.o
- .debug_abbrev  0x000007be       0x9f system\build\bsp\src\BSP_RCC.o
- .debug_abbrev  0x0000085d      0x14d system\build\bsp\src\BSP_SPI.o
- .debug_abbrev  0x000009aa      0x135 system\build\bsp\src\BSP_TIM.o
- .debug_abbrev  0x00000adf      0x187 system\build\bsp\src\BSP_UART.o
- .debug_abbrev  0x00000c66       0xb8 system\build\DSA_utils\src\DSA_FiniteStateMachine.o
- .debug_abbrev  0x00000d1e      0x178 system\build\DSA_utils\src\DSA_MODBUS_Parse.o
- .debug_abbrev  0x00000e96       0xa5 system\build\DSA_utils\src\DSA_RingBuffer.o
- .debug_abbrev  0x00000f3b      0x139 system\build\DSA_utils\src\DSA_Schedule.o
- .debug_abbrev  0x00001074       0xc3 system\build\library\src\MAX7219.o
- .debug_abbrev  0x00001137      0x158 system\build\main\src\main.o
- .debug_abbrev  0x0000128f      0x13d system\build\system\CMSIS\system_stm32f1xx.o
- .debug_abbrev  0x000013cc       0xb3 system\build\system\src\syscalls.o
- .debug_abbrev  0x0000147f      0x145 system\build\system\startup\STM32F103C8T6_StartUp.o
+ .debug_abbrev  0x000001ba      0x1b5 system\build\app\src\APP_Read_Button.o
+ .debug_abbrev  0x0000036f      0x123 system\build\bsp\src\BSP_ADC.o
+ .debug_abbrev  0x00000492       0xe5 system\build\bsp\src\BSP_DMA.o
+ .debug_abbrev  0x00000577      0x15d system\build\bsp\src\BSP_EXTI.o
+ .debug_abbrev  0x000006d4      0x15a system\build\bsp\src\BSP_GPIO.o
+ .debug_abbrev  0x0000082e       0x9f system\build\bsp\src\BSP_RCC.o
+ .debug_abbrev  0x000008cd      0x14d system\build\bsp\src\BSP_SPI.o
+ .debug_abbrev  0x00000a1a      0x135 system\build\bsp\src\BSP_TIM.o
+ .debug_abbrev  0x00000b4f      0x187 system\build\bsp\src\BSP_UART.o
+ .debug_abbrev  0x00000cd6       0xb8 system\build\DSA_utils\src\DSA_FiniteStateMachine.o
+ .debug_abbrev  0x00000d8e      0x178 system\build\DSA_utils\src\DSA_MODBUS_Parse.o
+ .debug_abbrev  0x00000f06       0xa5 system\build\DSA_utils\src\DSA_RingBuffer.o
+ .debug_abbrev  0x00000fab      0x139 system\build\DSA_utils\src\DSA_Schedule.o
+ .debug_abbrev  0x000010e4       0xc3 system\build\library\src\MAX7219.o
+ .debug_abbrev  0x000011a7      0x158 system\build\main\src\main.o
+ .debug_abbrev  0x000012ff      0x13d system\build\system\CMSIS\system_stm32f1xx.o
+ .debug_abbrev  0x0000143c       0xb3 system\build\system\src\syscalls.o
+ .debug_abbrev  0x000014ef      0x145 system\build\system\startup\STM32F103C8T6_StartUp.o
 
 .debug_aranges  0x00000000      0x280
  .debug_aranges
@@ -362,52 +366,52 @@ LOAD linker stubs
  .debug_aranges
                 0x00000260       0x20 system\build\system\startup\STM32F103C8T6_StartUp.o
 
-.debug_line     0x00000000     0x27d8
- .debug_line    0x00000000      0x1ea system\build\app\src\APP_Control_Robot.o
- .debug_line    0x000001ea      0x1af system\build\app\src\App_Display.o
- .debug_line    0x00000399        0x0 system\build\app\src\APP_ReadCurrent.o
- .debug_line    0x00000399      0x235 system\build\app\src\APP_Read_Button.o
- .debug_line    0x000005ce      0x1dd system\build\bsp\src\BSP_ADC.o
- .debug_line    0x000007ab      0x1cd system\build\bsp\src\BSP_DMA.o
- .debug_line    0x00000978      0x1f8 system\build\bsp\src\BSP_EXTI.o
- .debug_line    0x00000b70      0x234 system\build\bsp\src\BSP_GPIO.o
- .debug_line    0x00000da4      0x21a system\build\bsp\src\BSP_RCC.o
- .debug_line    0x00000fbe      0x24a system\build\bsp\src\BSP_SPI.o
- .debug_line    0x00001208      0x2c3 system\build\bsp\src\BSP_TIM.o
- .debug_line    0x000014cb      0x230 system\build\bsp\src\BSP_UART.o
- .debug_line    0x000016fb      0x112 system\build\DSA_utils\src\DSA_FiniteStateMachine.o
- .debug_line    0x0000180d      0x294 system\build\DSA_utils\src\DSA_MODBUS_Parse.o
- .debug_line    0x00001aa1      0x1c3 system\build\DSA_utils\src\DSA_RingBuffer.o
- .debug_line    0x00001c64      0x1ed system\build\DSA_utils\src\DSA_Schedule.o
- .debug_line    0x00001e51      0x1f6 system\build\library\src\MAX7219.o
- .debug_line    0x00002047      0x282 system\build\main\src\main.o
- .debug_line    0x000022c9      0x218 system\build\system\CMSIS\system_stm32f1xx.o
- .debug_line    0x000024e1      0x119 system\build\system\src\syscalls.o
- .debug_line    0x000025fa      0x1de system\build\system\startup\STM32F103C8T6_StartUp.o
+.debug_line     0x00000000     0x29a0
+ .debug_line    0x00000000      0x1f6 system\build\app\src\APP_Control_Robot.o
+ .debug_line    0x000001f6      0x1db system\build\app\src\App_Display.o
+ .debug_line    0x000003d1        0x0 system\build\app\src\APP_ReadCurrent.o
+ .debug_line    0x000003d1      0x2cf system\build\app\src\APP_Read_Button.o
+ .debug_line    0x000006a0      0x1e9 system\build\bsp\src\BSP_ADC.o
+ .debug_line    0x00000889      0x1d9 system\build\bsp\src\BSP_DMA.o
+ .debug_line    0x00000a62      0x218 system\build\bsp\src\BSP_EXTI.o
+ .debug_line    0x00000c7a      0x256 system\build\bsp\src\BSP_GPIO.o
+ .debug_line    0x00000ed0      0x226 system\build\bsp\src\BSP_RCC.o
+ .debug_line    0x000010f6      0x256 system\build\bsp\src\BSP_SPI.o
+ .debug_line    0x0000134c      0x2cf system\build\bsp\src\BSP_TIM.o
+ .debug_line    0x0000161b      0x23c system\build\bsp\src\BSP_UART.o
+ .debug_line    0x00001857      0x11e system\build\DSA_utils\src\DSA_FiniteStateMachine.o
+ .debug_line    0x00001975      0x2a0 system\build\DSA_utils\src\DSA_MODBUS_Parse.o
+ .debug_line    0x00001c15      0x1cf system\build\DSA_utils\src\DSA_RingBuffer.o
+ .debug_line    0x00001de4      0x1f9 system\build\DSA_utils\src\DSA_Schedule.o
+ .debug_line    0x00001fdd      0x202 system\build\library\src\MAX7219.o
+ .debug_line    0x000021df      0x28e system\build\main\src\main.o
+ .debug_line    0x0000246d      0x224 system\build\system\CMSIS\system_stm32f1xx.o
+ .debug_line    0x00002691      0x125 system\build\system\src\syscalls.o
+ .debug_line    0x000027b6      0x1ea system\build\system\startup\STM32F103C8T6_StartUp.o
 
-.debug_str      0x00000000     0x13e1
- .debug_str     0x00000000     0x13e1 system\build\app\src\APP_Control_Robot.o
-                                0x2bc (size before relaxing)
- .debug_str     0x000013e1      0x23b system\build\app\src\App_Display.o
- .debug_str     0x000013e1       0xd9 system\build\app\src\APP_ReadCurrent.o
- .debug_str     0x000013e1      0x2eb system\build\app\src\APP_Read_Button.o
- .debug_str     0x000013e1      0x248 system\build\bsp\src\BSP_ADC.o
- .debug_str     0x000013e1      0x219 system\build\bsp\src\BSP_DMA.o
- .debug_str     0x000013e1      0x565 system\build\bsp\src\BSP_EXTI.o
- .debug_str     0x000013e1      0x263 system\build\bsp\src\BSP_GPIO.o
- .debug_str     0x000013e1      0x1d4 system\build\bsp\src\BSP_RCC.o
- .debug_str     0x000013e1      0x259 system\build\bsp\src\BSP_SPI.o
- .debug_str     0x000013e1      0x320 system\build\bsp\src\BSP_TIM.o
- .debug_str     0x000013e1      0x243 system\build\bsp\src\BSP_UART.o
- .debug_str     0x000013e1      0x29a system\build\DSA_utils\src\DSA_FiniteStateMachine.o
- .debug_str     0x000013e1      0x282 system\build\DSA_utils\src\DSA_MODBUS_Parse.o
- .debug_str     0x000013e1      0x1e8 system\build\DSA_utils\src\DSA_RingBuffer.o
- .debug_str     0x000013e1      0x271 system\build\DSA_utils\src\DSA_Schedule.o
- .debug_str     0x000013e1      0x22b system\build\library\src\MAX7219.o
- .debug_str     0x000013e1      0x34e system\build\main\src\main.o
- .debug_str     0x000013e1      0x22d system\build\system\CMSIS\system_stm32f1xx.o
- .debug_str     0x000013e1      0x1b2 system\build\system\src\syscalls.o
- .debug_str     0x000013e1      0x273 system\build\system\startup\STM32F103C8T6_StartUp.o
+.debug_str      0x00000000     0x155e
+ .debug_str     0x00000000     0x155e system\build\app\src\APP_Control_Robot.o
+                                0x2d4 (size before relaxing)
+ .debug_str     0x0000155e      0x260 system\build\app\src\App_Display.o
+ .debug_str     0x0000155e       0xf1 system\build\app\src\APP_ReadCurrent.o
+ .debug_str     0x0000155e      0x42c system\build\app\src\APP_Read_Button.o
+ .debug_str     0x0000155e      0x260 system\build\bsp\src\BSP_ADC.o
+ .debug_str     0x0000155e      0x231 system\build\bsp\src\BSP_DMA.o
+ .debug_str     0x0000155e      0x57d system\build\bsp\src\BSP_EXTI.o
+ .debug_str     0x0000155e      0x296 system\build\bsp\src\BSP_GPIO.o
+ .debug_str     0x0000155e      0x1ec system\build\bsp\src\BSP_RCC.o
+ .debug_str     0x0000155e      0x271 system\build\bsp\src\BSP_SPI.o
+ .debug_str     0x0000155e      0x338 system\build\bsp\src\BSP_TIM.o
+ .debug_str     0x0000155e      0x25b system\build\bsp\src\BSP_UART.o
+ .debug_str     0x0000155e      0x2c3 system\build\DSA_utils\src\DSA_FiniteStateMachine.o
+ .debug_str     0x0000155e      0x29a system\build\DSA_utils\src\DSA_MODBUS_Parse.o
+ .debug_str     0x0000155e      0x200 system\build\DSA_utils\src\DSA_RingBuffer.o
+ .debug_str     0x0000155e      0x29a system\build\DSA_utils\src\DSA_Schedule.o
+ .debug_str     0x0000155e      0x243 system\build\library\src\MAX7219.o
+ .debug_str     0x0000155e      0x377 system\build\main\src\main.o
+ .debug_str     0x0000155e      0x245 system\build\system\CMSIS\system_stm32f1xx.o
+ .debug_str     0x0000155e      0x1ca system\build\system\src\syscalls.o
+ .debug_str     0x0000155e      0x28b system\build\system\startup\STM32F103C8T6_StartUp.o
 
 .comment        0x00000000       0x45
  .comment       0x00000000       0x45 system\build\app\src\APP_Control_Robot.o
@@ -478,24 +482,24 @@ LOAD linker stubs
  .ARM.attributes
                 0x00000384       0x2d system\build\system\startup\STM32F103C8T6_StartUp.o
 
-.debug_frame    0x00000000      0xa08
+.debug_frame    0x00000000      0xa68
  .debug_frame   0x00000000       0x68 system\build\app\src\APP_Control_Robot.o
  .debug_frame   0x00000068       0x9c system\build\app\src\App_Display.o
- .debug_frame   0x00000104       0x64 system\build\app\src\APP_Read_Button.o
- .debug_frame   0x00000168       0x4c system\build\bsp\src\BSP_ADC.o
- .debug_frame   0x000001b4       0x30 system\build\bsp\src\BSP_DMA.o
- .debug_frame   0x000001e4       0x54 system\build\bsp\src\BSP_EXTI.o
- .debug_frame   0x00000238       0xcc system\build\bsp\src\BSP_GPIO.o
- .debug_frame   0x00000304       0x48 system\build\bsp\src\BSP_RCC.o
- .debug_frame   0x0000034c       0x78 system\build\bsp\src\BSP_SPI.o
- .debug_frame   0x000003c4      0x1dc system\build\bsp\src\BSP_TIM.o
- .debug_frame   0x000005a0       0x9c system\build\bsp\src\BSP_UART.o
- .debug_frame   0x0000063c       0x5c system\build\DSA_utils\src\DSA_FiniteStateMachine.o
- .debug_frame   0x00000698       0x84 system\build\DSA_utils\src\DSA_MODBUS_Parse.o
- .debug_frame   0x0000071c       0x88 system\build\DSA_utils\src\DSA_RingBuffer.o
- .debug_frame   0x000007a4       0x5c system\build\DSA_utils\src\DSA_Schedule.o
- .debug_frame   0x00000800       0xe8 system\build\library\src\MAX7219.o
- .debug_frame   0x000008e8       0x2c system\build\main\src\main.o
- .debug_frame   0x00000914       0x58 system\build\system\CMSIS\system_stm32f1xx.o
- .debug_frame   0x0000096c       0x54 system\build\system\src\syscalls.o
- .debug_frame   0x000009c0       0x48 system\build\system\startup\STM32F103C8T6_StartUp.o
+ .debug_frame   0x00000104       0xa4 system\build\app\src\APP_Read_Button.o
+ .debug_frame   0x000001a8       0x4c system\build\bsp\src\BSP_ADC.o
+ .debug_frame   0x000001f4       0x30 system\build\bsp\src\BSP_DMA.o
+ .debug_frame   0x00000224       0x54 system\build\bsp\src\BSP_EXTI.o
+ .debug_frame   0x00000278       0xec system\build\bsp\src\BSP_GPIO.o
+ .debug_frame   0x00000364       0x48 system\build\bsp\src\BSP_RCC.o
+ .debug_frame   0x000003ac       0x78 system\build\bsp\src\BSP_SPI.o
+ .debug_frame   0x00000424      0x1dc system\build\bsp\src\BSP_TIM.o
+ .debug_frame   0x00000600       0x9c system\build\bsp\src\BSP_UART.o
+ .debug_frame   0x0000069c       0x5c system\build\DSA_utils\src\DSA_FiniteStateMachine.o
+ .debug_frame   0x000006f8       0x84 system\build\DSA_utils\src\DSA_MODBUS_Parse.o
+ .debug_frame   0x0000077c       0x88 system\build\DSA_utils\src\DSA_RingBuffer.o
+ .debug_frame   0x00000804       0x5c system\build\DSA_utils\src\DSA_Schedule.o
+ .debug_frame   0x00000860       0xe8 system\build\library\src\MAX7219.o
+ .debug_frame   0x00000948       0x2c system\build\main\src\main.o
+ .debug_frame   0x00000974       0x58 system\build\system\CMSIS\system_stm32f1xx.o
+ .debug_frame   0x000009cc       0x54 system\build\system\src\syscalls.o
+ .debug_frame   0x00000a20       0x48 system\build\system\startup\STM32F103C8T6_StartUp.o

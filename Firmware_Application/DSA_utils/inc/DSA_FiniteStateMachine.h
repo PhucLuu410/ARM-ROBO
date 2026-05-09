@@ -6,6 +6,7 @@ typedef struct
 {
     uint8_t BUTTON_FLAG;
     uint8_t EMERGENCY_FLAG;
+    uint8_t SAVE_FLAG;
 } SystemFlag;
 
 typedef enum
@@ -23,6 +24,7 @@ typedef enum
     EVENT_IDLE,
     EVENT_EMERGENCY_PRESS,
     EVENT_BUTTON_PRESS,
+    EVENT_SAVE_PRESS
 } SystemEvent;
 
 SystemState FSM_Get_Next_State(SystemState current_state, SystemEvent event);

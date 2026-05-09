@@ -64,3 +64,12 @@ void EXTI15_10_IRQHandler(void)
         System_GPIO_Flag.EMERGENCY_FLAG = 1;
     }
 }
+
+void EXTI0_IRQHandler(void)
+{
+    if (EXTI->PR & (1 << 0))
+    {
+        EXTI->PR = (1 << 0);
+        System_GPIO_Flag.SAVE_FLAG = 1;
+    }
+}
