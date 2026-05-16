@@ -7,11 +7,13 @@ extern ModbusRequest request;
 ModbusRequest save_data[4];
 uint16_t save_data_index = 0;
 uint8_t press = 0;
+extern uint8_t GoToOffSetFlag;
 
 void Button_Pressed(void)
 {
     if (System_GPIO_Flag.BUTTON_FLAG == 1)
     {
+        GoToOffSetFlag = 0;
         current_event = EVENT_BUTTON_PRESS;
         System_GPIO_Flag.BUTTON_FLAG = 0;
         press = (press + 1) % 3;
@@ -25,18 +27,6 @@ void Button_Pressed(void)
             break;
         case 2:
             Display_ShowMode2();
-            while (1)
-            {
-                for (int i = 0; i < 4; i++)
-                {
-                    TIM2_PWM_CH1_Change_Duty(save_data[i].servo_1);
-                    TIM2_PWM_CH2_Change_Duty(save_data[i].servo_2);
-                    TIM2_PWM_CH3_Change_Duty(save_data[i].servo_3);
-                    TIM2_PWM_CH4_Change_Duty(save_data[i].servo_4);
-                    for (int j = 0; j < 1000000; j++)
-                        ;
-                }
-            }
             break;
         default:
             break;
@@ -60,8 +50,9 @@ void Emergency_Button_Pressed(void)
 }
 static void Save_Button_Led(void)
 {
+    GPIO_WritePin(GPIOA, 4, 0);
     GPIO_Config(GPIOA, 4, GPIO_MODE_OUTPUT_10M, GPIO_CNF_GP_PP);
-    GPIO_TogglePin(GPIOA, 4);
+    GPIO_WritePin(GPIOA, 4, 1);
 }
 
 void Save_Button_State(void)

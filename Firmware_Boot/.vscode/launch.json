@@ -1,0 +1,30 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Cortex Debug (SWD)",
+            "cwd": "${workspaceFolder}",
+            "executable": "${workspaceFolder}/boot.elf",
+            "request": "launch",
+            "type": "cortex-debug",
+            "servertype": "openocd",
+            "interface": "swd",
+            "device": "STM32F103C8",
+            "svdFile": "${workspaceFolder}/system/debug/STM32F103.svd",
+            "preLaunchTask": "Build STM32",
+            "configFiles": [
+                "interface/stlink.cfg",
+                "target/stm32f1x.cfg"
+            ],
+            "runToEntryPoint": "main",
+            "liveWatch": {
+                "enabled": true,
+                "samplesPerSecond": 20
+            },
+            "postLaunchCommands": [
+                "monitor reset halt"
+            ],
+            "postDebugTask": "Kill OpenOCD"
+        }
+    ]
+}

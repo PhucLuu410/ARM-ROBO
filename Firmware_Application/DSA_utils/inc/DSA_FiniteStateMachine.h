@@ -13,7 +13,8 @@ typedef enum
 {
     STATE_INIT,
     STATE_IDLE,
-    STATE_RUNNING_MODE,
+    STATE_RUNNING_MODE1,
+    STATE_RUNNING_MODE2,
     STATE_ERROR
 
 } SystemState;

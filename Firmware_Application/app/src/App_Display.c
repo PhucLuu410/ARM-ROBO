@@ -1,21 +1,11 @@
 #include "APP_Display.h"
 
 uint8_t Error_String[] = {0x4F, 0x05, 0x05, 0x1D, 0x05, 0x00, 0x00, 0x00};
-uint8_t Stop_String[] = {0x7E, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
-uint8_t Mode1_String[] = {0x7E, 0x7E, 0x30, 0x00, 0x00, 0x00, 0x00, 0x00};
-uint8_t Mode2_String[] = {0x7E, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
-uint8_t Reset_String[] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+uint8_t Stop_String[] = {0x7E, 0x7E, 0x7E, 0x00, 0x00, 0x00, 0x00, 0x00};
+uint8_t Mode1_String[] = {0x30, 0x30, 0x30, 0x00, 0x00, 0x00, 0x00, 0x00};
+uint8_t Mode2_String[] = {0x6D, 0x6D, 0x6D, 0x00, 0x00, 0x00, 0x00, 0x00};
 void Display_ShowError(void)
 {
-    MAX7219_DisplayDigit(7, Reset_String[0]);
-    MAX7219_DisplayDigit(6, Reset_String[0]);
-    MAX7219_DisplayDigit(5, Reset_String[0]);
-    MAX7219_DisplayDigit(4, Reset_String[0]);
-    MAX7219_DisplayDigit(3, Reset_String[0]);
-    MAX7219_DisplayDigit(2, Reset_String[0]);
-    MAX7219_DisplayDigit(1, Reset_String[0]);
-    MAX7219_DisplayDigit(0, Reset_String[0]);
-
     MAX7219_DisplayDigit(7, Error_String[0]);
     MAX7219_DisplayDigit(6, Error_String[1]);
     MAX7219_DisplayDigit(5, Error_String[2]);
@@ -27,15 +17,6 @@ void Display_ShowError(void)
 }
 void Display_ShowMode1(void)
 {
-    MAX7219_DisplayDigit(7, Reset_String[0]);
-    MAX7219_DisplayDigit(6, Reset_String[0]);
-    MAX7219_DisplayDigit(5, Reset_String[0]);
-    MAX7219_DisplayDigit(4, Reset_String[0]);
-    MAX7219_DisplayDigit(3, Reset_String[0]);
-    MAX7219_DisplayDigit(2, Reset_String[0]);
-    MAX7219_DisplayDigit(1, Reset_String[0]);
-    MAX7219_DisplayDigit(0, Reset_String[0]);
-
     MAX7219_DisplayDigit(7, Mode1_String[0]);
     MAX7219_DisplayDigit(6, Mode1_String[1]);
     MAX7219_DisplayDigit(5, Mode1_String[2]);
@@ -47,15 +28,6 @@ void Display_ShowMode1(void)
 }
 void Display_ShowMode2(void)
 {
-    MAX7219_DisplayDigit(7, Reset_String[0]);
-    MAX7219_DisplayDigit(6, Reset_String[0]);
-    MAX7219_DisplayDigit(5, Reset_String[0]);
-    MAX7219_DisplayDigit(4, Reset_String[0]);
-    MAX7219_DisplayDigit(3, Reset_String[0]);
-    MAX7219_DisplayDigit(2, Reset_String[0]);
-    MAX7219_DisplayDigit(1, Reset_String[0]);
-    MAX7219_DisplayDigit(0, Reset_String[0]);
-
     MAX7219_DisplayDigit(7, Mode2_String[0]);
     MAX7219_DisplayDigit(6, Mode2_String[1]);
     MAX7219_DisplayDigit(5, Mode2_String[2]);
@@ -67,15 +39,6 @@ void Display_ShowMode2(void)
 }
 void Display_ShowStop(void)
 {
-    MAX7219_DisplayDigit(7, Reset_String[0]);
-    MAX7219_DisplayDigit(6, Reset_String[0]);
-    MAX7219_DisplayDigit(5, Reset_String[0]);
-    MAX7219_DisplayDigit(4, Reset_String[0]);
-    MAX7219_DisplayDigit(3, Reset_String[0]);
-    MAX7219_DisplayDigit(2, Reset_String[0]);
-    MAX7219_DisplayDigit(1, Reset_String[0]);
-    MAX7219_DisplayDigit(0, Reset_String[0]);
-
     MAX7219_DisplayDigit(7, Stop_String[0]);
     MAX7219_DisplayDigit(6, Stop_String[1]);
     MAX7219_DisplayDigit(5, Stop_String[2]);
