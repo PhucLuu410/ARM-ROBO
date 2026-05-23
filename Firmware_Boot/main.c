@@ -3,182 +3,121 @@
 #include <stdint.h>
 #include "stm32f103xb.h"
 
+volatile uint8_t currentByte = 0;
+volatile uint16_t current_buffer = 0;
+volatile uint32_t current_addr = APP_ADDR;
+volatile uint8_t flag = 0;
 static void delay(volatile uint32_t d)
 {
     while (d--)
         ;
 }
 
-typedef void (*AppEntry)(void);
-
-void Clock_Init(void)
+void Flash_Init(void)
 {
-    RCC->CR |= RCC_CR_HSION;
-    while (!(RCC->CR & RCC_CR_HSIRDY))
+    FLASH->ACR |= (1 << 4);
+    while (!(FLASH->ACR & (1 << 5)))
         ;
-}
-void UART_Init(void)
-{
-    RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
-    RCC->APB2ENR |= RCC_APB2ENR_USART1EN;
-    GPIOA->CRH &= ~(0xF << 4);
-    GPIOA->CRH |= (0xB << 4);
-    GPIOA->CRH &= ~(0xF << 8);
-    GPIOA->CRH |= (0x4 << 8);
-    USART1->BRR = 0x341;
-    USART1->CR1 = USART_CR1_TE | USART_CR1_RE | USART_CR1_UE;
+    FLASH->KEYR = 0x45670123;
+    FLASH->KEYR = 0xCDEF89AB;
 }
 
-void UART_WriteByte(uint8_t data)
+void Flash_ErasePage(uint32_t Address, uint32_t NumberPage)
 {
-    while (!(USART1->SR & USART_SR_TXE))
+    while (FLASH->SR & (1 << 0))
         ;
-
-    USART1->DR = data;
-}
-
-uint8_t UART_ReadByteTimeout(uint32_t timeout)
-{
-    while (timeout--)
+    FLASH->CR |= (1 << 1);
+    for (int i = 0; i < NumberPage; i++)
     {
-        if (USART1->SR & USART_SR_RXNE)
-        {
-            return USART1->DR;
-        }
+        FLASH->AR = Address + (i * 1024);
+        FLASH->CR |= FLASH_CR_STRT;
+        while (FLASH->SR & (1 << 0))
+            ;
     }
-    return 0;
+    FLASH->CR &= ~(1 << 1);
 }
 
-void jump_to_app(void)
+void Flash_WriteHalfWord(uint32_t Address, uint16_t Data)
 {
-    uint32_t app_sp = *(volatile uint32_t *)APP_ADDR;
-    uint32_t app_reset = *(volatile uint32_t *)(APP_ADDR + 4);
-    if ((app_sp & 0x2FFE0000) != 0x20000000)
-        return;
-    __disable_irq();
-    SysTick->CTRL = 0;
-    SysTick->LOAD = 0;
-    SysTick->VAL = 0;
-    NVIC->ICER[0] = 0xFFFFFFFF;
-    NVIC->ICPR[0] = 0xFFFFFFFF;
-    SCB->VTOR = APP_ADDR;
-    __set_MSP(app_sp);
-    AppEntry app = (AppEntry)(app_reset | 1U);
-    app();
+    while (FLASH->SR & (1 << 0))
+        ;
+    FLASH->CR |= (1 << 0);
+    *(volatile uint16_t *)Address = Data;
+    while (FLASH->SR & (1 << 0))
+        ;
+    FLASH->CR &= ~(1 << 0);
 }
 
-void Flash_Unlock(void)
-{
-    if (FLASH->CR & FLASH_CR_LOCK)
-    {
-        FLASH->KEYR = 0x45670123;
-        FLASH->KEYR = 0xCDEF89AB;
-    }
-}
-
-void Flash_ErasePage(uint32_t address)
+void Flash_MassErase(void)
 {
     while (FLASH->SR & FLASH_SR_BSY)
         ;
-
-    FLASH->CR |= FLASH_CR_PER;
-
-    FLASH->AR = address;
-
+    FLASH->CR |= FLASH_CR_MER;
     FLASH->CR |= FLASH_CR_STRT;
-
     while (FLASH->SR & FLASH_SR_BSY)
         ;
-
-    FLASH->CR &= ~FLASH_CR_PER;
+    FLASH->CR &= ~FLASH_CR_MER;
 }
 
-void Flash_WriteHalfWord(uint32_t address, uint16_t data)
+void Uart_Init(void)
 {
-    while (FLASH->SR & FLASH_SR_BSY)
+    USART1->BRR = 0x341;
+    USART1->CR1 |= (1 << 5) | (1 << 3) | (1 << 2);
+    USART1->CR1 |= (1 << 13);
+    NVIC_EnableIRQ(USART1_IRQn);
+}
+void System_Init(void)
+{
+    RCC->CR |= (1 << 0);
+    while (!(RCC->CR & (1 << 1)))
         ;
+    RCC->APB2ENR |= (1 << 0) | (1 << 2) | (1 << 4) | (1 << 9) | (1 << 14);
 
-    FLASH->CR |= FLASH_CR_PG;
-
-    *(volatile uint16_t *)address = data;
-
-    while (FLASH->SR & FLASH_SR_BSY)
-        ;
-
-    FLASH->CR &= ~FLASH_CR_PG;
+    GPIOA->CRL = 0x00000000;
+    GPIOA->CRH = 0x00000000;
+    GPIOA->CRL |= (1 << 16) | (1 << 17) | (1 << 18);
+    GPIOA->CRH |= (0x0B << 4) | (8 << 8);
 }
 
-void Boot_ReceiveFirmware(void)
+void JumpToApp(void)
 {
-    uint32_t size = 0;
-    uint8_t *p = (uint8_t *)&size;
-    for (int i = 0; i < 4; i++)
-    {
-        p[i] = UART_ReadByteTimeout(0xFFFFFF);
-    }
-    Flash_Unlock();
-    for (uint32_t addr = APP_ADDR;
-         addr < (APP_ADDR + size + 1024);
-         addr += 1024)
-    {
-        Flash_ErasePage(addr);
-    }
-    uint32_t flash_addr = APP_ADDR;
-    for (uint32_t i = 0; i < size; i += 2)
-    {
-        uint16_t data = 0xFFFF;
-
-        uint8_t low = UART_ReadByteTimeout(0xFFFFFF);
-        uint8_t high = 0xFF;
-        if ((i + 1) < size)
-        {
-            high = UART_ReadByteTimeout(0xFFFFFF);
-        }
-        data = low | (high << 8);
-        Flash_WriteHalfWord(flash_addr, data);
-        flash_addr += 2;
-    }
-    for (int i = 0; i < 3; i++)
-    {
-        GPIOC->ODR ^= (1 << 13);
-        delay(500000);
-    }
-    jump_to_app();
+    uint32_t *App_Psp = (uint32_t *)APP_ADDR;
+    uint32_t *App_Entry = (uint32_t *)(APP_ADDR + 4);
+    __set_MSP(*App_Psp);
+    void (*App_Jump)(void) = (void (*)(void))(*App_Entry);
+    App_Jump();
 }
 
 int main(void)
 {
-    RCC->APB2ENR |= RCC_APB2ENR_IOPCEN;
-
-    GPIOC->CRH &= ~(0xF << 20);
-    GPIOC->CRH |= (0x2 << 20);
-    volatile uint8_t Update_Flag = 0;
-    GPIOC->ODR |= (1 << 13);
-    Clock_Init();
-    UART_Init();
-    UART_WriteByte('U');
-    uint8_t resp = UART_ReadByteTimeout(3000000);
-    if (resp == 'Y')
-    {
-        GPIOC->ODR &= ~(1 << 13);
-        delay(500000);
-        Update_Flag = 1;
-    }
-    if (Update_Flag == 0)
-    {
-        for (int i = 0; i < 3; i++)
-        {
-            GPIOC->ODR ^= (1 << 13);
-            delay(500000);
-        }
-        jump_to_app();
-    }
+    System_Init();
+    Flash_Init();
+    Uart_Init();
+    Flash_ErasePage(APP_ADDR, 60);
+    currentByte = 0;
+    // Flash_MassErase();
+    // JumpToApp();
     while (1)
     {
-        if (Update_Flag == 1)
+    }
+}
+
+void USART1_IRQHandler(void)
+{
+    if (USART1->SR & (1 << 5))
+    {
+        volatile uint8_t data = (uint8_t)USART1->DR;
+        if (currentByte == 0)
         {
-            UART_WriteByte('S');
-            Boot_ReceiveFirmware();
+            current_buffer = data & 0x00FF;
+            currentByte = 1;
+        }
+        if (currentByte == 1)
+        {
+            current_buffer |= (data << 8);
+            Flash_WriteHalfWord(current_addr, current_buffer);
+            current_addr += 2;
+            currentByte = 0;
         }
     }
 }
