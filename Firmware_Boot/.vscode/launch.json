@@ -25,6 +25,19 @@
                 "monitor reset halt"
             ],
             "postDebugTask": "Kill OpenOCD"
+        },
+        {
+            "name": "Debug C++ App",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/Load_Firmware.exe",
+            "args": [],
+            "stopAtEntry": true,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "gdb.exe"
         }
     ]
 }
