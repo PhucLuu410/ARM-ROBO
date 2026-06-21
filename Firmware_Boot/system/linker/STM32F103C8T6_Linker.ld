@@ -6,7 +6,7 @@
         RAM (xrw)     : ORIGIN = 0x20000000, LENGTH = 20K
     }
 
-        SECTIONS
+    SECTIONS
     {
     
     .isr_vector :

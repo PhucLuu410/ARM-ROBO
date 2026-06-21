@@ -5,10 +5,10 @@
 
 int main()
 {
-    std::string filePath = "C:\\Users\\luuph\\OneDrive\\Desktop\\ROBOT_ARM\\Firmware_Application\\system\\build\\project.bin";
+    std::string filePath = "C:\\Users\\Phuc Luu\\OneDrive\\Desktop\\ARM-ROBO\\Firmware_Application\\system\\build\\project.bin";
 
     // 1. Mở cổng COM
-    HANDLE hSerial = CreateFileA("\\\\.\\COM5", GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, NULL);
+    HANDLE hSerial = CreateFileA("\\\\.\\COM9", GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, NULL);
     if (hSerial == INVALID_HANDLE_VALUE)
     {
         std::cerr << "Khong mo duoc COM5!" << std::endl;
