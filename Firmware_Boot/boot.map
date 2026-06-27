@@ -17,8 +17,6 @@ Discarded input sections
  .bss.initialFileLength
                 0x00000000        0x4 main.o
  .text.delay    0x00000000       0x20 main.o
- .text.Uart_SendData
-                0x00000000       0x2c main.o
  .text.JumpToApp
                 0x00000000        0xc main.o
  .text          0x00000000        0x0 system/startup/STM32F103C8T6_StartUp.o
@@ -37,20 +35,20 @@ Linker script and memory map
 LOAD main.o
 LOAD system/startup/STM32F103C8T6_StartUp.o
 START GROUP
-LOAD C:/Program Files (x86)/Arm GNU Toolchain arm-none-eabi/14.2 rel1/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp\libgcc.a
-LOAD C:/Program Files (x86)/Arm GNU Toolchain arm-none-eabi/14.2 rel1/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp\libg.a
-LOAD C:/Program Files (x86)/Arm GNU Toolchain arm-none-eabi/14.2 rel1/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp\libc.a
+LOAD c:/programdata/chocolatey/lib/gcc-arm-embedded/tools/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp\libgcc.a
+LOAD c:/programdata/chocolatey/lib/gcc-arm-embedded/tools/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp\libg.a
+LOAD c:/programdata/chocolatey/lib/gcc-arm-embedded/tools/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp\libc.a
 END GROUP
 
 .isr_vector     0x08000000       0xe4
-                0x08000000                        . = ALIGN (0x4)
+                0x08000000                . = ALIGN (0x4)
  *(.isr_vector)
  .isr_vector    0x08000000       0xe4 system/startup/STM32F103C8T6_StartUp.o
                 0x08000000                g_pfnVectors
-                0x080000e4                        . = ALIGN (0x4)
+                0x080000e4                . = ALIGN (0x4)
 
-.text           0x080000e4      0x344
-                0x080000e4                        . = ALIGN (0x4)
+.text           0x080000e4      0x3d0
+                0x080000e4                . = ALIGN (0x4)
  *(.text)
  *(.text*)
  .text.__NVIC_EnableIRQ
@@ -70,104 +68,120 @@ END GROUP
  .text.Uart_Init
                 0x08000264       0x34 main.o
                 0x08000264                Uart_Init
- .text.main     0x08000298       0xb8 main.o
-                0x08000298                main
+ .text.Uart_SendData
+                0x08000298       0x2c main.o
+                0x08000298                Uart_SendData
+ .text.main     0x080002c4      0x118 main.o
+                0x080002c4                main
  .text.USART1_IRQHandler
-                0x08000350       0x60 main.o
-                0x08000350                USART1_IRQHandler
+                0x080003dc       0x60 main.o
+                0x080003dc                USART1_IRQHandler
  .text.HardFault_Handler
-                0x080003b0        0x8 main.o
-                0x080003b0                HardFault_Handler
+                0x0800043c        0x6 main.o
+                0x0800043c                HardFault_Handler
+ *fill*         0x08000442        0x2 
  .text.Reset_Handler
-                0x080003b8       0x68 system/startup/STM32F103C8T6_StartUp.o
-                0x080003b8                Reset_Handler
+                0x08000444       0x68 system/startup/STM32F103C8T6_StartUp.o
+                0x08000444                Reset_Handler
  .text.Default_Handler
-                0x08000420        0x8 system/startup/STM32F103C8T6_StartUp.o
-                0x08000420                DebugMon_Handler
-                0x08000420                SysTick_Handler
-                0x08000420                PVD_IRQHandler
-                0x08000420                PendSV_Handler
-                0x08000420                NMI_Handler
-                0x08000420                EXTI0_IRQHandler
-                0x08000420                UsageFault_Handler
-                0x08000420                ADC1_2_IRQHandler
-                0x08000420                TIM3_IRQHandler
-                0x08000420                Default_Handler
-                0x08000420                EXTI15_10_IRQHandler
-                0x08000420                MemManage_Handler
-                0x08000420                SVC_Handler
-                0x08000420                WWDG_IRQHandler
-                0x08000420                TIM2_IRQHandler
-                0x08000420                EXTI1_IRQHandler
-                0x08000420                BusFault_Handler
+                0x080004ac        0x8 system/startup/STM32F103C8T6_StartUp.o
+                0x080004ac                DebugMon_Handler
+                0x080004ac                SysTick_Handler
+                0x080004ac                PVD_IRQHandler
+                0x080004ac                PendSV_Handler
+                0x080004ac                NMI_Handler
+                0x080004ac                EXTI0_IRQHandler
+                0x080004ac                UsageFault_Handler
+                0x080004ac                ADC1_2_IRQHandler
+                0x080004ac                TIM3_IRQHandler
+                0x080004ac                Default_Handler
+                0x080004ac                EXTI15_10_IRQHandler
+                0x080004ac                MemManage_Handler
+                0x080004ac                SVC_Handler
+                0x080004ac                WWDG_IRQHandler
+                0x080004ac                TIM2_IRQHandler
+                0x080004ac                EXTI1_IRQHandler
+                0x080004ac                BusFault_Handler
  *(.rodata)
  *(.rodata*)
-                0x08000428                        . = ALIGN (0x4)
-                0x08000428                        _etext = .
+                0x080004b4                . = ALIGN (0x4)
+                0x080004b4                _etext = .
 
-.glue_7         0x08000428        0x0
- .glue_7        0x08000428        0x0 linker stubs
+.glue_7         0x080004b4        0x0
+ .glue_7        0x080004b4        0x0 linker stubs
 
-.glue_7t        0x08000428        0x0
- .glue_7t       0x08000428        0x0 linker stubs
+.glue_7t        0x080004b4        0x0
+ .glue_7t       0x080004b4        0x0 linker stubs
 
-.vfp11_veneer   0x08000428        0x0
- .vfp11_veneer  0x08000428        0x0 linker stubs
+.vfp11_veneer   0x080004b4        0x0
+ .vfp11_veneer  0x080004b4        0x0 linker stubs
 
-.v4_bx          0x08000428        0x0
- .v4_bx         0x08000428        0x0 linker stubs
+.v4_bx          0x080004b4        0x0
+ .v4_bx         0x080004b4        0x0 linker stubs
 
-.iplt           0x08000428        0x0
- .iplt          0x08000428        0x0 main.o
+.iplt           0x080004b4        0x0
+ .iplt          0x080004b4        0x0 main.o
 
-.rel.dyn        0x08000428        0x0
- .rel.iplt      0x08000428        0x0 main.o
+.rel.dyn        0x080004b4        0x0
+ .rel.iplt      0x080004b4        0x0 main.o
 
-.data           0x20000000        0x0 load address 0x08000428
-                0x20000000                        . = ALIGN (0x4)
-                0x20000000                        _sdata = .
+.data           0x20000000        0x0 load address 0x080004b4
+                0x20000000                . = ALIGN (0x4)
+                0x20000000                _sdata = .
  *(.data)
  *(.data*)
-                0x20000000                        . = ALIGN (0x4)
-                0x20000000                        _edata = .
-                0x08000428                        _sidata = LOADADDR (.data)
+                0x20000000                . = ALIGN (0x4)
+                0x20000000                _edata = .
+                0x080004b4                _sidata = LOADADDR (.data)
 
-.igot.plt       0x20000000        0x0 load address 0x08000428
+.igot.plt       0x20000000        0x0 load address 0x080004b4
  .igot.plt      0x20000000        0x0 main.o
 
-.bss            0x20000000        0x0 load address 0x08000428
-                0x20000000                        . = ALIGN (0x4)
-                0x20000000                        _sbss = .
-                0x20000000                        . = ALIGN (0x4)
-                0x20000000                        _ebss = .
-                0x20000000                        _sheap = .
-                0x20005000                        _estack = (ORIGIN (RAM) + LENGTH (RAM))
+.bss            0x20000000        0x0 load address 0x080004b4
+                0x20000000                . = ALIGN (0x4)
+                0x20000000                _sbss = .
+                0x20000000                . = ALIGN (0x4)
+                0x20000000                _ebss = .
+                0x20000000                _sheap = .
+                0x20005000                _estack = (ORIGIN (RAM) + LENGTH (RAM))
 OUTPUT(boot.elf elf32-littlearm)
 LOAD linker stubs
 
 .bss.Update_Flag
-                0x20000000        0x1 load address 0x08000428
+                0x20000000        0x1 load address 0x080004b4
  .bss.Update_Flag
                 0x20000000        0x1 main.o
                 0x20000000                Update_Flag
 
 .bss.Data_Buffer
-                0x20000004       0x10 load address 0x08000428
+                0x20000004       0x10 load address 0x080004b4
  .bss.Data_Buffer
                 0x20000004       0x10 main.o
                 0x20000004                Data_Buffer
 
-.bss.Index      0x20000014        0x1 load address 0x08000428
+.bss.Index      0x20000014        0x1 load address 0x080004b4
  .bss.Index     0x20000014        0x1 main.o
                 0x20000014                Index
 
-.debug_info     0x00000000      0xadd
- .debug_info    0x00000000      0x7e8 main.o
- .debug_info    0x000007e8      0x2f5 system/startup/STM32F103C8T6_StartUp.o
+.bss.current_address_write
+                0x20000018        0x4 load address 0x080004b4
+ .bss.current_address_write
+                0x20000018        0x4 main.o
+                0x20000018                current_address_write
 
-.debug_abbrev   0x00000000      0x340
- .debug_abbrev  0x00000000      0x20e main.o
- .debug_abbrev  0x0000020e      0x132 system/startup/STM32F103C8T6_StartUp.o
+.bss.PtrApplication
+                0x2000001c        0x4 load address 0x080004b4
+ .bss.PtrApplication
+                0x2000001c        0x4 main.o
+                0x2000001c                PtrApplication
+
+.debug_info     0x00000000      0xd8b
+ .debug_info    0x00000000      0xa96 main.o
+ .debug_info    0x00000a96      0x2f5 system/startup/STM32F103C8T6_StartUp.o
+
+.debug_abbrev   0x00000000      0x392
+ .debug_abbrev  0x00000000      0x260 main.o
+ .debug_abbrev  0x00000260      0x132 system/startup/STM32F103C8T6_StartUp.o
 
 .debug_aranges  0x00000000       0xa0
  .debug_aranges
@@ -175,26 +189,24 @@ LOAD linker stubs
  .debug_aranges
                 0x00000078       0x28 system/startup/STM32F103C8T6_StartUp.o
 
-.debug_rnglists
-                0x00000000       0x6f
- .debug_rnglists
-                0x00000000       0x56 main.o
- .debug_rnglists
-                0x00000056       0x19 system/startup/STM32F103C8T6_StartUp.o
+.debug_ranges   0x00000000       0x68
+ .debug_ranges  0x00000000       0x68 main.o
 
-.debug_line     0x00000000      0x582
- .debug_line    0x00000000      0x3f5 main.o
- .debug_line    0x000003f5      0x18d system/startup/STM32F103C8T6_StartUp.o
+.debug_line     0x00000000      0x61f
+ .debug_line    0x00000000      0x492 main.o
+ .debug_line    0x00000492      0x18d system/startup/STM32F103C8T6_StartUp.o
 
-.debug_str      0x00000000      0x7b0
- .debug_str     0x00000000      0x7b0 main.o
-                                0x711 (size before relaxing)
- .debug_str     0x000007b0      0x23d system/startup/STM32F103C8T6_StartUp.o
+.debug_str      0x00000000      0x883
+ .debug_str     0x00000000      0x753 main.o
+                                0x7c5 (size before relaxing)
+ .debug_str     0x00000753      0x130 system/startup/STM32F103C8T6_StartUp.o
+                                0x23d (size before relaxing)
 
-.comment        0x00000000       0x45
- .comment       0x00000000       0x45 main.o
+.comment        0x00000000       0x8e
+ .comment       0x00000000       0x49 main.o
+                                 0x4a (size before relaxing)
+ .comment       0x00000049       0x45 system/startup/STM32F103C8T6_StartUp.o
                                  0x46 (size before relaxing)
- .comment       0x00000045       0x46 system/startup/STM32F103C8T6_StartUp.o
 
 .ARM.attributes
                 0x00000000       0x2d
@@ -206,3 +218,8 @@ LOAD linker stubs
 .debug_frame    0x00000000      0x1f4
  .debug_frame   0x00000000      0x1ac main.o
  .debug_frame   0x000001ac       0x48 system/startup/STM32F103C8T6_StartUp.o
+
+.debug_rnglists
+                0x00000000       0x19
+ .debug_rnglists
+                0x00000000       0x19 system/startup/STM32F103C8T6_StartUp.o

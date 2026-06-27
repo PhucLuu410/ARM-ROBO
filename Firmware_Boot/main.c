@@ -25,6 +25,8 @@ volatile BootState bootState = BOOT_IDLE_STATE;
 uint16_t *pLength = NULL;
 uint32_t initialFileLength = 0;
 volatile uint8_t Index = 0;
+uint32_t current_address_write = 0;
+void (*PtrApplication)(void);
 
 static void delay(volatile uint32_t d)
 {
@@ -104,6 +106,7 @@ int main(void)
     Uart_Init();
     Index = 0;
     Update_Flag = 0;
+    current_address_write = APP_ADDR;
     for (int i = 0; i < 16; i++)
     {
         Data_Buffer[i] = 0;
@@ -118,8 +121,20 @@ int main(void)
         {
             for (int i = 0; i < 8; i++)
             {
-                Flash_WriteHalfWord(APP_ADDR + (0x2 * i), (Data_Buffer[i]) | (Data_Buffer[i + 1] << 8));
+                uint16_t DataWrite = (Data_Buffer[(i * 2)]) | (Data_Buffer[(i * 2) + 1] << 8);
+                Flash_WriteHalfWord(current_address_write, DataWrite);
+                current_address_write = current_address_write + 0x02;
             }
+            if (current_address_write == 0x08002900)
+            {
+                SCB->VTOR = 0x08001000;
+                __set_MSP(*(volatile uint32_t *)0x08001000);
+                uint32_t JumpAddress = *(volatile uint32_t *)(0x08001000 + 4);
+                PtrApplication = (void (*)())JumpAddress;
+                PtrApplication();
+            }
+            Update_Flag = 0;
+            Uart_SendData(0x06);
         }
     }
 }
