@@ -1,0 +1,331 @@
+
+Discarded input sections
+
+ .text          0x00000000        0x0 main.o
+ .data          0x00000000        0x0 main.o
+ .bss           0x00000000        0x0 main.o
+ .text.JumpToApp
+                0x00000000        0xc main.o
+ .text          0x00000000        0x0 system/startup/STM32F103C8T6_StartUp.o
+ .data          0x00000000        0x0 system/startup/STM32F103C8T6_StartUp.o
+ .bss           0x00000000        0x0 system/startup/STM32F103C8T6_StartUp.o
+ .text          0x00000000        0x0 App/Com.o
+ .data          0x00000000        0x0 App/Com.o
+ .bss           0x00000000        0x0 App/Com.o
+ .debug_info    0x00000000       0x73 App/Com.o
+ .debug_abbrev  0x00000000       0x26 App/Com.o
+ .debug_aranges
+                0x00000000       0x18 App/Com.o
+ .debug_line    0x00000000       0x2a App/Com.o
+ .debug_str     0x00000000      0x152 App/Com.o
+ .comment       0x00000000       0x46 App/Com.o
+ .ARM.attributes
+                0x00000000       0x2d App/Com.o
+ .text          0x00000000        0x0 App/Firmware.o
+ .data          0x00000000        0x0 App/Firmware.o
+ .bss           0x00000000        0x0 App/Firmware.o
+ .debug_info    0x00000000       0x73 App/Firmware.o
+ .debug_abbrev  0x00000000       0x26 App/Firmware.o
+ .debug_aranges
+                0x00000000       0x18 App/Firmware.o
+ .debug_line    0x00000000       0x2f App/Firmware.o
+ .debug_str     0x00000000      0x157 App/Firmware.o
+ .comment       0x00000000       0x46 App/Firmware.o
+ .ARM.attributes
+                0x00000000       0x2d App/Firmware.o
+ .text          0x00000000        0x0 App/State_Machine.o
+ .data          0x00000000        0x0 App/State_Machine.o
+ .bss           0x00000000        0x0 App/State_Machine.o
+ .debug_info    0x00000000       0x73 App/State_Machine.o
+ .debug_abbrev  0x00000000       0x26 App/State_Machine.o
+ .debug_aranges
+                0x00000000       0x18 App/State_Machine.o
+ .debug_line    0x00000000       0x34 App/State_Machine.o
+ .debug_str     0x00000000      0x15c App/State_Machine.o
+ .comment       0x00000000       0x46 App/State_Machine.o
+ .ARM.attributes
+                0x00000000       0x2d App/State_Machine.o
+ .text          0x00000000        0x0 App/System.o
+ .data          0x00000000        0x0 App/System.o
+ .bss           0x00000000        0x0 App/System.o
+ .text          0x00000000        0x0 Bsp/Uart.o
+ .data          0x00000000        0x0 Bsp/Uart.o
+ .bss           0x00000000        0x0 Bsp/Uart.o
+ .bss.Start_Buffer
+                0x00000000        0x3 Bsp/Uart.o
+ .bss.Update_Flag
+                0x00000000        0x1 Bsp/Uart.o
+ .text          0x00000000        0x0 Bsp/Flash.o
+ .data          0x00000000        0x0 Bsp/Flash.o
+ .bss           0x00000000        0x0 Bsp/Flash.o
+ .text.Flash_ErasePage
+                0x00000000       0x5c Bsp/Flash.o
+ .text.Flash_WriteHalfWord
+                0x00000000       0x54 Bsp/Flash.o
+ .text          0x00000000        0x0 Bsp/Dio.o
+ .data          0x00000000        0x0 Bsp/Dio.o
+ .bss           0x00000000        0x0 Bsp/Dio.o
+ .debug_info    0x00000000       0x65 Bsp/Dio.o
+ .debug_abbrev  0x00000000       0x26 Bsp/Dio.o
+ .debug_aranges
+                0x00000000       0x18 Bsp/Dio.o
+ .debug_line    0x00000000       0x2a Bsp/Dio.o
+ .debug_str     0x00000000      0x141 Bsp/Dio.o
+ .comment       0x00000000       0x46 Bsp/Dio.o
+ .ARM.attributes
+                0x00000000       0x2d Bsp/Dio.o
+ .text          0x00000000        0x0 Bsp/Port.o
+ .data          0x00000000        0x0 Bsp/Port.o
+ .bss           0x00000000        0x0 Bsp/Port.o
+ .debug_info    0x00000000       0x65 Bsp/Port.o
+ .debug_abbrev  0x00000000       0x26 Bsp/Port.o
+ .debug_aranges
+                0x00000000       0x18 Bsp/Port.o
+ .debug_line    0x00000000       0x2b Bsp/Port.o
+ .debug_str     0x00000000      0x142 Bsp/Port.o
+ .comment       0x00000000       0x46 Bsp/Port.o
+ .ARM.attributes
+                0x00000000       0x2d Bsp/Port.o
+ .text          0x00000000        0x0 Bsp/Rcc.o
+ .data          0x00000000        0x0 Bsp/Rcc.o
+ .bss           0x00000000        0x0 Bsp/Rcc.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+FLASH            0x08000000         0x00001000         xr
+RAM              0x20000000         0x00005000         xrw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD main.o
+LOAD system/startup/STM32F103C8T6_StartUp.o
+LOAD App/Com.o
+LOAD App/Firmware.o
+LOAD App/State_Machine.o
+LOAD App/System.o
+LOAD Bsp/Uart.o
+LOAD Bsp/Flash.o
+LOAD Bsp/Dio.o
+LOAD Bsp/Port.o
+LOAD Bsp/Rcc.o
+START GROUP
+LOAD C:/Program Files (x86)/Arm GNU Toolchain arm-none-eabi/14.2 rel1/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp\libgcc.a
+LOAD C:/Program Files (x86)/Arm GNU Toolchain arm-none-eabi/14.2 rel1/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp\libg.a
+LOAD C:/Program Files (x86)/Arm GNU Toolchain arm-none-eabi/14.2 rel1/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v7-m/nofp\libc.a
+END GROUP
+
+.isr_vector     0x08000000       0xe4
+                0x08000000                        . = ALIGN (0x4)
+ *(.isr_vector)
+ .isr_vector    0x08000000       0xe4 system/startup/STM32F103C8T6_StartUp.o
+                0x08000000                g_pfnVectors
+                0x080000e4                        . = ALIGN (0x4)
+
+.text           0x080000e4      0x2e8
+                0x080000e4                        . = ALIGN (0x4)
+ *(.text)
+ *(.text*)
+ .text.delay    0x080000e4       0x20 main.o
+ .text.main     0x08000104       0x60 main.o
+                0x08000104                main
+ .text.HardFault_Handler
+                0x08000164        0x8 main.o
+                0x08000164                HardFault_Handler
+ .text.Reset_Handler
+                0x0800016c       0x68 system/startup/STM32F103C8T6_StartUp.o
+                0x0800016c                Reset_Handler
+ .text.Default_Handler
+                0x080001d4        0x8 system/startup/STM32F103C8T6_StartUp.o
+                0x080001d4                DebugMon_Handler
+                0x080001d4                SysTick_Handler
+                0x080001d4                PVD_IRQHandler
+                0x080001d4                PendSV_Handler
+                0x080001d4                NMI_Handler
+                0x080001d4                EXTI0_IRQHandler
+                0x080001d4                UsageFault_Handler
+                0x080001d4                ADC1_2_IRQHandler
+                0x080001d4                TIM3_IRQHandler
+                0x080001d4                Default_Handler
+                0x080001d4                EXTI15_10_IRQHandler
+                0x080001d4                MemManage_Handler
+                0x080001d4                SVC_Handler
+                0x080001d4                WWDG_IRQHandler
+                0x080001d4                TIM2_IRQHandler
+                0x080001d4                EXTI1_IRQHandler
+                0x080001d4                BusFault_Handler
+ .text.System_Init
+                0x080001dc       0x14 App/System.o
+                0x080001dc                System_Init
+ .text.__NVIC_EnableIRQ
+                0x080001f0       0x38 Bsp/Uart.o
+ .text.Uart_Init
+                0x08000228       0x64 Bsp/Uart.o
+                0x08000228                Uart_Init
+ .text.Uart_SendData
+                0x0800028c       0x2c Bsp/Uart.o
+                0x0800028c                Uart_SendData
+ .text.Uart_GetData
+                0x080002b8       0x38 Bsp/Uart.o
+                0x080002b8                Uart_GetData
+ .text.USART1_IRQHandler
+                0x080002f0       0x44 Bsp/Uart.o
+                0x080002f0                USART1_IRQHandler
+ .text.Flash_Init
+                0x08000334       0x34 Bsp/Flash.o
+                0x08000334                Flash_Init
+ .text.Rcc_Init
+                0x08000368       0x64 Bsp/Rcc.o
+                0x08000368                Rcc_Init
+ *(.rodata)
+ *(.rodata*)
+                0x080003cc                        . = ALIGN (0x4)
+                0x080003cc                        _etext = .
+
+.glue_7         0x080003cc        0x0
+ .glue_7        0x080003cc        0x0 linker stubs
+
+.glue_7t        0x080003cc        0x0
+ .glue_7t       0x080003cc        0x0 linker stubs
+
+.vfp11_veneer   0x080003cc        0x0
+ .vfp11_veneer  0x080003cc        0x0 linker stubs
+
+.v4_bx          0x080003cc        0x0
+ .v4_bx         0x080003cc        0x0 linker stubs
+
+.iplt           0x080003cc        0x0
+ .iplt          0x080003cc        0x0 main.o
+
+.rel.dyn        0x080003cc        0x0
+ .rel.iplt      0x080003cc        0x0 main.o
+
+.data           0x20000000        0x0 load address 0x080003cc
+                0x20000000                        . = ALIGN (0x4)
+                0x20000000                        _sdata = .
+ *(.data)
+ *(.data*)
+                0x20000000                        . = ALIGN (0x4)
+                0x20000000                        _edata = .
+                0x080003cc                        _sidata = LOADADDR (.data)
+
+.igot.plt       0x20000000        0x0 load address 0x080003cc
+ .igot.plt      0x20000000        0x0 main.o
+
+.bss            0x20000000        0x0 load address 0x080003cc
+                0x20000000                        . = ALIGN (0x4)
+                0x20000000                        _sbss = .
+                0x20000000                        . = ALIGN (0x4)
+                0x20000000                        _ebss = .
+                0x20000000                        _sheap = .
+                0x20005000                        _estack = (ORIGIN (RAM) + LENGTH (RAM))
+OUTPUT(system/build/boot.elf elf32-littlearm)
+LOAD linker stubs
+
+.bss.data       0x20000000       0x10 load address 0x080003cc
+ .bss.data      0x20000000       0x10 main.o
+                0x20000000                data
+
+.bss.Index      0x20000010        0x1 load address 0x080003cc
+ .bss.Index     0x20000010        0x1 Bsp/Uart.o
+
+.bss.Data_Buffer
+                0x20000014       0x10 load address 0x080003cc
+ .bss.Data_Buffer
+                0x20000014       0x10 Bsp/Uart.o
+                0x20000014                Data_Buffer
+
+.debug_info     0x00000000      0xd01
+ .debug_info    0x00000000      0x17a main.o
+ .debug_info    0x0000017a      0x2f5 system/startup/STM32F103C8T6_StartUp.o
+ .debug_info    0x0000046f       0x9f App/System.o
+ .debug_info    0x0000050e      0x4cd Bsp/Uart.o
+ .debug_info    0x000009db      0x189 Bsp/Flash.o
+ .debug_info    0x00000b64      0x19d Bsp/Rcc.o
+
+.debug_abbrev   0x00000000      0x60c
+ .debug_abbrev  0x00000000      0x12e main.o
+ .debug_abbrev  0x0000012e      0x132 system/startup/STM32F103C8T6_StartUp.o
+ .debug_abbrev  0x00000260       0x58 App/System.o
+ .debug_abbrev  0x000002b8      0x1e7 Bsp/Uart.o
+ .debug_abbrev  0x0000049f       0xcc Bsp/Flash.o
+ .debug_abbrev  0x0000056b       0xa1 Bsp/Rcc.o
+
+.debug_aranges  0x00000000      0x110
+ .debug_aranges
+                0x00000000       0x38 main.o
+ .debug_aranges
+                0x00000038       0x28 system/startup/STM32F103C8T6_StartUp.o
+ .debug_aranges
+                0x00000060       0x20 App/System.o
+ .debug_aranges
+                0x00000080       0x40 Bsp/Uart.o
+ .debug_aranges
+                0x000000c0       0x30 Bsp/Flash.o
+ .debug_aranges
+                0x000000f0       0x20 Bsp/Rcc.o
+
+.debug_rnglists
+                0x00000000       0xae
+ .debug_rnglists
+                0x00000000       0x25 main.o
+ .debug_rnglists
+                0x00000025       0x19 system/startup/STM32F103C8T6_StartUp.o
+ .debug_rnglists
+                0x0000003e       0x13 App/System.o
+ .debug_rnglists
+                0x00000051       0x2b Bsp/Uart.o
+ .debug_rnglists
+                0x0000007c       0x1f Bsp/Flash.o
+ .debug_rnglists
+                0x0000009b       0x13 Bsp/Rcc.o
+
+.debug_line     0x00000000      0x94f
+ .debug_line    0x00000000      0x1ad main.o
+ .debug_line    0x000001ad      0x18d system/startup/STM32F103C8T6_StartUp.o
+ .debug_line    0x0000033a       0x66 App/System.o
+ .debug_line    0x000003a0      0x240 Bsp/Uart.o
+ .debug_line    0x000005e0      0x1fe Bsp/Flash.o
+ .debug_line    0x000007de      0x171 Bsp/Rcc.o
+
+.debug_str      0x00000000      0x6f3
+ .debug_str     0x00000000      0x6f3 main.o
+                                0x1c8 (size before relaxing)
+ .debug_str     0x000006f3      0x23c system/startup/STM32F103C8T6_StartUp.o
+ .debug_str     0x000006f3      0x17f App/System.o
+ .debug_str     0x000006f3      0x54c Bsp/Uart.o
+ .debug_str     0x000006f3      0x1d0 Bsp/Flash.o
+ .debug_str     0x000006f3      0x1c5 Bsp/Rcc.o
+
+.comment        0x00000000       0x45
+ .comment       0x00000000       0x45 main.o
+                                 0x46 (size before relaxing)
+ .comment       0x00000045       0x46 system/startup/STM32F103C8T6_StartUp.o
+ .comment       0x00000045       0x46 App/System.o
+ .comment       0x00000045       0x46 Bsp/Uart.o
+ .comment       0x00000045       0x46 Bsp/Flash.o
+ .comment       0x00000045       0x46 Bsp/Rcc.o
+
+.ARM.attributes
+                0x00000000       0x2d
+ .ARM.attributes
+                0x00000000       0x2d main.o
+ .ARM.attributes
+                0x0000002d       0x2d system/startup/STM32F103C8T6_StartUp.o
+ .ARM.attributes
+                0x0000005a       0x2d App/System.o
+ .ARM.attributes
+                0x00000087       0x2d Bsp/Uart.o
+ .ARM.attributes
+                0x000000b4       0x2d Bsp/Flash.o
+ .ARM.attributes
+                0x000000e1       0x2d Bsp/Rcc.o
+
+.debug_frame    0x00000000      0x280
+ .debug_frame   0x00000000       0x90 main.o
+ .debug_frame   0x00000090       0x48 system/startup/STM32F103C8T6_StartUp.o
+ .debug_frame   0x000000d8       0x2c App/System.o
+ .debug_frame   0x00000104       0xcc Bsp/Uart.o
+ .debug_frame   0x000001d0       0x80 Bsp/Flash.o
+ .debug_frame   0x00000250       0x30 Bsp/Rcc.o

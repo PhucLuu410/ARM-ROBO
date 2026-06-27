@@ -4,7 +4,7 @@
         {
             "name": "Cortex Debug (SWD)",
             "cwd": "${workspaceFolder}",
-            "executable": "${workspaceFolder}/boot.elf",
+            "executable": "${workspaceFolder}/system/build/boot.elf",
             "request": "launch",
             "type": "cortex-debug",
             "servertype": "openocd",
@@ -35,9 +35,10 @@
             "stopAtEntry": true,
             "cwd": "${workspaceFolder}",
             "environment": [],
-            "externalConsole": false,
+            "externalConsole": true,
             "MIMode": "gdb",
-            "miDebuggerPath": "gdb.exe"
+            "miDebuggerPath": "gdb.exe",
+            "preLaunchTask": "Build C++ App"
         }
     ]
 }

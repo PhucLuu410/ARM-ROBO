@@ -25,6 +25,24 @@
             "type": "shell",
             "command": "taskkill /f /im openocd.exe",
             "problemMatcher": []
+        },
+        {
+            "label": "Build C++ App",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-g",
+                "Load_Firmware.cpp",
+                "-o",
+                "Load_Firmware.exe"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
         }
     ]
 }
